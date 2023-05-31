@@ -1,0 +1,4 @@
+enum TableShape {
+  rectangle,
+  circle,
+}
