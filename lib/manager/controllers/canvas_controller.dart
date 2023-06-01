@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:creatego_packages/creatego_packages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_layout_demo/ui/table_widget.dart';
@@ -155,5 +159,90 @@ class CanvasController extends GetxController {
     heightTEC.dispose();
     widthTEC.dispose();
     super.onClose();
+  }
+
+  Future<void> saveAsJson() async {
+    logger(getSelectedTable!.controller.getOffset);
+    return;
+    String widgetName = "test";
+    // waiting for the user to enter the name of the widget
+    await Get.dialog(AlertDialog(
+      title: Text("Please enter the name of the widget"),
+      content: TextFormField(
+        initialValue: widgetName,
+        decoration: InputDecoration(hintText: "Widget name"),
+        onChanged: (value) {
+          widgetName = value;
+        },
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Get.back();
+          },
+          child: Text("Cancel"),
+        ),
+        TextButton(
+          onPressed: () {
+            Get.back(result: widgetName);
+          },
+          child: Text("Save"),
+        ),
+      ],
+    ));
+    if (widgetName.isEmpty) {
+      Get.showSnackbar(GetSnackBar(
+        title: "Error",
+        message: "Please enter a name",
+      ));
+      return;
+    }
+    //get the type of the widget
+    final String type = "test";
+
+    //get the block size
+    final Size canvasSize = Size(
+        GridSettingsConstants.defaultGridCells.toOffsetFromCellIndex.dx,
+        GridSettingsConstants.defaultGridCells.toOffsetFromCellIndex.dy);
+
+    Future<bool> writeJson(File json) async {
+      bool success = false;
+      final File file = await json.writeAsString(
+        jsonEncode(
+          {
+            "widget": widgetName,
+            "type": type,
+            "options": {
+              "required_vars": [
+                {
+                  "name": "width",
+                  "type": "double",
+                  "value": canvasSize.width,
+                },
+                {
+                  "name": "height",
+                  "type": "double",
+                  "value": canvasSize.height,
+                }
+              ],
+            }
+          },
+        ),
+      );
+      if (file.existsSync()) {
+        success = true;
+      }
+      return success;
+    }
+
+    //create a JSON file and save locally with the above data
+    final File json = File("gen/widget_configs/${widgetName}_config.json");
+    writeJson(json).then((success) {
+      Get.showSnackbar(const GetSnackBar(
+        duration: Duration(seconds: 2),
+        title: "Success",
+        message: "Widget saved successfully",
+      ));
+    });
   }
 }

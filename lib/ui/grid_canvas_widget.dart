@@ -28,7 +28,7 @@ class GridCanvas extends StatelessWidget {
           key: GlobalKeyConstants.canvasGridKey,
           divisions: 1,
           color: GridDecorations.defaultGridColor,
-          interval: GridSettingsConstants.defaultGridInterval,
+          interval: GridSettingsConstants.defaultGridCellSize.width,
           subdivisions: GridSettingsConstants.defaultGridSubdivision,
           child: GetBuilder<CanvasController>(
             id: GridConstants.gridCanvasId,

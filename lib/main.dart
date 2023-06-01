@@ -130,11 +130,13 @@ class _HomepageState extends State<Homepage> {
                 if (result != null) {
                   double? width = result["width"];
                   if (width != null) {
-                    width = width / GridSettingsConstants.defaultGridInterval;
+                    width =
+                        width / GridSettingsConstants.defaultGridCellSize.width;
                   }
                   double? height = result["height"];
                   if (height != null) {
-                    height = height / GridSettingsConstants.defaultGridInterval;
+                    height = height /
+                        GridSettingsConstants.defaultGridCellSize.width;
                   }
                   final colCount = result["colCount"];
                   if (colCount != null) {
@@ -152,40 +154,7 @@ class _HomepageState extends State<Homepage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // logger("Canvas Size : ${GlobalKeyConstants.canvasGridKey.getSize}");
-          // logger(
-          //     "Canvas Size : ${GridSettingsConstants.defaultGridCellSize.width * GridSettingsConstants.defaultGridCells.dx}");
-          // logger(
-          //     "Canvas Size : ${GridSettingsConstants.defaultGridCellSize.height * GridSettingsConstants.defaultGridCells.dy}");
-          // logger(
-          //     "Canvas left top corner : ${CanvasController.to.getLeftTopCorner}");
-          // logger(
-          //     "Canvas right top corner : ${CanvasController.to.getRightTopCorner}");
-          // logger(
-          //     "Canvas left bottom corner : ${CanvasController.to.geLeftBottomCorner}");
-          // logger(
-          //     "Canvas right bottom corner : ${CanvasController.to.getRightBottomCorner}");
-          //
-          // logger("--------------------------");
-          // logger(
-          //     "Selected table size : ${CanvasController.to.getSelectedTable?.controller.getSize}");
-          // logger(
-          //     "Selected table center position : ${CanvasController.to.getSelectedTable?.controller.getCenterOffset}");
-          // logger(
-          //     "Selected table left top corner : ${CanvasController.to.getSelectedTable?.controller.getLeftTopCorner}");
-          // logger(
-          //     "Selected table right top corner : ${CanvasController.to.getSelectedTable?.controller.getRightTopCorner}");
-          // logger(
-          //     "Selected table left bottom corner : ${CanvasController.to.getSelectedTable?.controller.getLeftBottomCorner}");
-          // logger(
-          //     "Table touching top : ${CanvasController.to.getSelectedTable?.controller.isTouchingCanvasTop}");
-          // logger(
-          //     "Table touching left : ${CanvasController.to.getSelectedTable?.controller.isTouchingCanvasLeft}");
-          // logger(
-          //     "Table touching right : ${CanvasController.to.getSelectedTable?.controller.isTouchingCanvasRight}");
-          logger(
-              "Table touching bottom : ${CanvasController.to.getSelectedTable?.controller.getOffset.toCellIndex}");
-          // CanvasController.to.getSelectedTable?.controller.moveToBottomLeft();
+          CanvasController.to.saveAsJson();
         },
         label: const Text(
           'Test Button',

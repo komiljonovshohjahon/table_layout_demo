@@ -1,0 +1,38 @@
+{
+  "widget": "test",
+  "type": "text",
+  "options": {
+    "required_vars": [
+      {
+        "name": "width",
+        "type": "double",
+        "value": 100
+      },
+      {
+        "name": "height",
+        "type": "double",
+        "value": 100
+      }
+    ]
+  },
+  "children": [
+    {
+      "widget": "CustomButton",
+      "options": {
+        "text": " Button",
+        "backgroundColor": " 4294198070",
+        "width": 100.0,
+        "height": 50.0,
+        "fontSize": 16.0,
+        "fontWeight": 3,
+        "textColor": " 4294967295",
+        "borderRadius": "BorderRadius.zero",
+        "isIconRight": true
+      },
+      "offset": {
+        "x": 85,
+        "y": 100
+      }
+    }
+  ]
+}

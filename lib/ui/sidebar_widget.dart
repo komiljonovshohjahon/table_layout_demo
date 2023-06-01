@@ -74,21 +74,36 @@ class SidebarWidget extends StatelessWidget {
               ),
             ],
           ),
+          const Divider(),
           RepaintBoundary(
             child: GetBuilder<CanvasController>(
               id: GridConstants.gridSidebarTablePropsId,
-              builder: (controller) => TextButton(
-                  onPressed: controller.getSelectedTable != null
-                      ? controller.removeTable
-                      : null,
-                  style: TextButton.styleFrom(
-                      minimumSize:
-                          Size(GridSettingsConstants.defaultSidebarWidth, 50),
-                      side: const BorderSide(
-                        color: Colors.blueGrey,
-                        width: 1,
-                      )),
-                  child: const Text("Delete")),
+              builder: (controller) => SpacedRow(
+                children: [
+                  // Expanded(
+                  //   child: TextButton(
+                  //       onPressed: controller.getSelectedTable != null
+                  //           ? controller.removeTable
+                  //           : null,
+                  //       style: TextButton.styleFrom(
+                  //           side: const BorderSide(
+                  //         color: Colors.blueGrey,
+                  //         width: 1,
+                  //       )),
+                  //       child: const Text("Delete")),
+                  // ),
+                  Expanded(
+                    child: TextButton(
+                        onPressed: controller.saveAsJson,
+                        style: TextButton.styleFrom(
+                            side: const BorderSide(
+                          color: Colors.blueGrey,
+                          width: 1,
+                        )),
+                        child: const Text("Save as JSON")),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

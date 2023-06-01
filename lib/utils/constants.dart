@@ -6,8 +6,6 @@ class GlobalKeyConstants {
 }
 
 class GridSettingsConstants {
-  static double defaultGridInterval = 10;
-
   static int columnCount = 0;
   static double columnGutter = 30;
   static Color columnColor = const Color(0xFFFF0000).withOpacity(.1);
@@ -19,15 +17,18 @@ class GridSettingsConstants {
 
   ///Number of cells in the grid => (x,y)
   ///
-  /// Default to: (x = 120, y = 10)
+  /// Default to: (x = 60, y = 50)
   static Offset defaultGridCells =
-      const Offset(108, 16); // Number of pixels in the grid x and y
+      const Offset(60, 50); // Number of pixels in the grid x and y
 
+  /// Number of pixels in each cell => (width, height)
+  ///
+  /// Default to: (width = 10, height = 10)
   static Size defaultGridCellSize = const Size(10, 10);
 
   /// Makes 1 cell [_defaultGridCellSize.height] pixels
   static int get defaultGridSubdivision =>
-      defaultGridInterval ~/ defaultGridCellSize.height;
+      defaultGridCellSize.width ~/ defaultGridCellSize.height;
   static Size get defaultTableSize =>
       const Size(8, 8).toSizeFromCellIndex; // 8 is pixels of table
   static double defaultSidebarWidth = 500;
