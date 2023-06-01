@@ -8,11 +8,11 @@ set minute=%TIME:~3,2%
 set second=%TIME:~6,2%
 set date=%year%-%month%-%day% %hour%:%minute%:%second%
 
-call flutter clean
-call flutter pub get
+call fvm flutter clean
+call fvm flutter pub get
 del pubspec.lock
 
-call flutter build web --release
+call fvm flutter build web --release
 
 REM rmdir /s /q website
 REM mkdir website
