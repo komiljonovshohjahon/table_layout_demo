@@ -44,7 +44,7 @@ class _HomepageState extends State<Homepage> {
                 children: [
                   Row(
                     children: [
-                      const SizedBox(width: 50, child: Text("Width: ")),
+                      const SizedBox(width: 150, child: Text("Width: ")),
                       Expanded(
                         child: TextField(
                           controller:
@@ -58,7 +58,7 @@ class _HomepageState extends State<Homepage> {
                   ),
                   Row(
                     children: [
-                      const SizedBox(width: 50, child: Text("Height: ")),
+                      const SizedBox(width: 150, child: Text("Height: ")),
                       Expanded(
                         child: TextField(
                           controller:
@@ -73,7 +73,7 @@ class _HomepageState extends State<Homepage> {
                   Row(
                     children: [
                       const SizedBox(
-                          width: 50,
+                          width: 150,
                           child: Text("Column count (0 to remove): ")),
                       Expanded(
                         child: TextField(

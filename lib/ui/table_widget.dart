@@ -132,10 +132,7 @@ class _TableWidgetState extends State<TableWidget> {
           width: 2,
           strokeAlign: BorderSide.strokeAlignInside);
     } else {
-      return Border.all(
-          color: Colors.transparent,
-          width: 2,
-          strokeAlign: BorderSide.strokeAlignInside);
+      return Border.all(color: Colors.transparent);
     }
   }
 

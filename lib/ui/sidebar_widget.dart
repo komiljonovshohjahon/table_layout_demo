@@ -19,7 +19,6 @@ class SidebarWidget extends StatelessWidget {
       ),
       width: GridSettingsConstants.defaultSidebarWidth,
       height: MediaQuery.of(context).size.height,
-      padding: const EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -36,8 +35,9 @@ class SidebarWidget extends StatelessWidget {
                 child: GetBuilder<CanvasController>(
                   id: GridConstants.gridSidebarBarTableListId,
                   builder: (controller) => SizedBox(
-                    height: MediaQuery.of(context).size.height / 2 - 150,
+                    height: MediaQuery.of(context).size.height / 2 - 100,
                     child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Wrap(
                         spacing: 10,
                         runSpacing: 10,
@@ -74,7 +74,6 @@ class SidebarWidget extends StatelessWidget {
               ),
             ],
           ),
-          const Divider(height: 2, color: Colors.blueGrey),
           RepaintBoundary(
             child: GetBuilder<CanvasController>(
               id: GridConstants.gridSidebarTablePropsId,
@@ -241,8 +240,9 @@ class SidebarWidget extends StatelessWidget {
 
     return RepaintBoundary(
       child: SizedBox(
-        height: MediaQuery.of(context).size.height / 2 - 150,
+        height: MediaQuery.of(context).size.height / 2 - 100,
         child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           children: [
             for (Widget param in params) ...[param, const SizedBox(height: 20)],
           ],
