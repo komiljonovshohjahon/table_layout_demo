@@ -162,9 +162,21 @@ class CanvasController extends GetxController {
   }
 
   Future<void> saveAsJson() async {
-    logger(getSelectedTable!.controller.getOffset);
-    return;
+    //get the name of the widget
     String widgetName = "test";
+
+    //get the type of the widget
+    final String type = "test";
+
+    //get the block size
+    final Size canvasSize = Size(
+        GridSettingsConstants.defaultGridCells.toOffsetFromCellIndex.dx,
+        GridSettingsConstants.defaultGridCells.toOffsetFromCellIndex.dy);
+
+    //get the children of the widget
+    final List<TableController> childrenControllers =
+        tables.map<TableController>((element) => element.controller).toList();
+
     // waiting for the user to enter the name of the widget
     await Get.dialog(AlertDialog(
       title: Text("Please enter the name of the widget"),
@@ -197,37 +209,39 @@ class CanvasController extends GetxController {
       ));
       return;
     }
-    //get the type of the widget
-    final String type = "test";
-
-    //get the block size
-    final Size canvasSize = Size(
-        GridSettingsConstants.defaultGridCells.toOffsetFromCellIndex.dx,
-        GridSettingsConstants.defaultGridCells.toOffsetFromCellIndex.dy);
 
     Future<bool> writeJson(File json) async {
       bool success = false;
       final File file = await json.writeAsString(
-        jsonEncode(
-          {
-            "widget": widgetName,
-            "type": type,
-            "options": {
-              "required_vars": [
-                {
-                  "name": "width",
-                  "type": "double",
-                  "value": canvasSize.width,
-                },
-                {
-                  "name": "height",
-                  "type": "double",
-                  "value": canvasSize.height,
-                }
-              ],
-            }
+        jsonEncode({
+          "component_name": widgetName,
+          "component_type": type,
+          "options": {
+            "required_variables": [
+              {
+                "name": "component_width",
+                "type": "double",
+                "value": canvasSize.width
+              },
+              {
+                "name": "component_height",
+                "type": "double",
+                "value": canvasSize.height
+              }
+            ]
           },
-        ),
+          "children": [
+            for (final child in childrenControllers)
+              {
+                "offset": {"x": child.getOffset.dx, "y": child.getOffset.dy},
+                "size": {"w": child.getSize.width, "h": child.getSize.height},
+                "name": "child_${child.tableId}",
+                "type": child.child.toString(),
+                "option_type": child.child!.options.toString(),
+                "options": child.child!.options.toJson()
+              }
+          ]
+        }),
       );
       if (file.existsSync()) {
         success = true;

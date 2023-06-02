@@ -1,1 +1,56 @@
-{"widget":"test","type":"test","options":{"required_vars":[{"name":"width","type":"double","value":1080.0},{"name":"height","type":"double","value":160.0}]}}
+{
+  "component_name": "test",
+  "component_type": "test",
+  "options": {
+    "required_variables": [
+      {
+        "name": "component_width",
+        "type": "double",
+        "value": 600.0
+      },
+      {
+        "name": "component_height",
+        "type": "double",
+        "value": 500.0
+      }
+    ]
+  },
+  "children": [
+    {
+      "offset": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "size": {
+        "w": 80.0,
+        "h": 80.0
+      },
+      "name": "child_2",
+      "type": "CustomIcon"
+    },
+    {
+      "offset": {
+        "x": 520.0,
+        "y": 0.0
+      },
+      "size": {
+        "w": 80.0,
+        "h": 80.0
+      },
+      "name": "child_0",
+      "type": "CustomButton"
+    },
+    {
+      "offset": {
+        "x": 265.0,
+        "y": 420.0
+      },
+      "size": {
+        "w": 80.0,
+        "h": 80.0
+      },
+      "name": "child_3",
+      "type": "CustomImage"
+    }
+  ]
+}

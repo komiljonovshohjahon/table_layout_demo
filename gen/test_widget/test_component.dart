@@ -4,25 +4,21 @@ import 'package:flutter/material.dart';
 
 class CustomTestOptions {
   CustomTestOptions({
-    required this.width,
-    required this.height,
-    
+    required this.component_width,
+    required this.component_height,
   });
 
-  final double width;
-  final double height;
-  
+  final double component_width;
+  final double component_height;
 }
 
 class _State {
- final double width = 100;
- final double height = 100;
- 
+  final double component_width = 100;
+  final double component_height = 100;
 
   CustomTestOptions get options => CustomTestOptions(
-        width: 100,
-        height: 100,
-       
+        component_width: 100,
+        component_height: 100,
       );
 }
 
@@ -41,35 +37,58 @@ class CustomTestComponent extends IWidget<CustomTestOptions> {
     );
   }
 
-  
   @override
   IWidget copy() {
     final CustomTestComponent newWidget = CustomTestComponent();
     return newWidget;
   }
 
- @override
+  @override
   CustomTestOptions setOptions() {
     return _state.options;
   }
 
-    @override
-  WidgetType get widgetType => WidgetType.text;
+  @override
+  WidgetType get widgetType => WidgetType.test;
 }
 
-
 class _CustomTestWidget extends StatelessWidget {
-  const _CustomTestWidget(this.options,{Key? key}) : super(key: key);
+  _CustomTestWidget(this.options, {Key? key}) : super(key: key);
 
   final CustomTestOptions options;
 
+  //
+  // final CustomButton button = CustomButton(customOptions: ButtonOptions.fromMap({"text": 'text', "backgroundColor": '#FFffffff', "width": 100, "height": 50, "fontSize": 12, "fontWeight": FontWeight.normal, "textColor": '#FF000000', "borderRadius": BorderRadius.circular(0), "isIconRight": false}));
+  //
+
   @override
   Widget build(BuildContext context) {
-    return  SizedBox(
-      width: options.width,
-      height: options.height,
-      child: Container(
-        color: Colors.red,
+    return Container(
+      color: Colors.white,
+      width: options.component_width,
+      height: options.component_height,
+      child: Stack(
+        children: [
+          Positioned(
+            left: 85,
+            top: 100,
+            child: SizedBox(
+                width: 100,
+                height: 100,
+                child: CustomButton(
+                    customOptions: ButtonOptions.fromMap({
+                  "text": 'text',
+                  "backgroundColor": '#FFffffff',
+                  "width": 100,
+                  "height": 50,
+                  "fontSize": 12,
+                  "fontWeight": FontWeight.normal,
+                  "textColor": '#FF000000',
+                  "borderRadius": BorderRadius.circular(0),
+                  "isIconRight": false
+                }))), //TODO: make this a proper child
+          ),
+        ],
       ),
     );
   }

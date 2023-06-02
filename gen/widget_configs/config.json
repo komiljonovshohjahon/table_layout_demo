@@ -1,15 +1,15 @@
 {
-  "widget": "test",
-  "type": "text",
+  "component_name": "test",
+  "component_type": "test",
   "options": {
-    "required_vars": [
+    "required_variables": [
       {
-        "name": "width",
+        "name": "component_width",
         "type": "double",
         "value": 100
       },
       {
-        "name": "height",
+        "name": "component_height",
         "type": "double",
         "value": 100
       }
@@ -17,21 +17,27 @@
   },
   "children": [
     {
-      "widget": "CustomButton",
-      "options": {
-        "text": " Button",
-        "backgroundColor": " 4294198070",
-        "width": 100.0,
-        "height": 50.0,
-        "fontSize": 16.0,
-        "fontWeight": 3,
-        "textColor": " 4294967295",
-        "borderRadius": "BorderRadius.zero",
-        "isIconRight": true
-      },
       "offset": {
         "x": 85,
         "y": 100
+      },
+      "size": {
+        "w": 100,
+        "h": 100
+      },
+      "name": "button",
+      "type": "CustomButton",
+      "option_type": "ButtonOptions",
+      "options": {
+        "\"text\"": "'text'",
+        "\"backgroundColor\"": "0xFFffffff",
+        "\"width\"": 100.0,
+        "\"height\"": 50.0,
+        "\"fontSize\"": 12.0,
+        "\"fontWeight\"": "FontWeight.normal",
+        "\"textColor\"": "0xFF000000",
+        "\"borderRadius\"": 0.0,
+        "\"isIconRight\"": false
       }
     }
   ]

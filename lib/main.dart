@@ -154,7 +154,7 @@ class _HomepageState extends State<Homepage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          CanvasController.to.saveAsJson();
+          logger(CanvasController.to.getSelectedTable?.controller.getOffset);
         },
         label: const Text(
           'Test Button',
