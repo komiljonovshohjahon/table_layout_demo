@@ -63,7 +63,11 @@ class _TableWidgetState extends State<TableWidget> {
           width: widget.controller.getSize.width,
           height: widget.controller.getSize.height,
           child: GestureDetector(
-              onPanUpdate: onPanUpdate, child: _getPressableTable()));
+              onPanUpdate: onPanUpdate,
+              child: CustomPaint(
+                  foregroundPainter:
+                      _TablePainter(controller: widget.controller),
+                  child: _getPressableTable())));
     }
     return Positioned(
       top: widget.controller.getOffset.dy,
@@ -104,36 +108,11 @@ class _TableWidgetState extends State<TableWidget> {
           child: SizedBox(
             width: widget.controller.getSize.width,
             height: widget.controller.getSize.height,
-            child: DecoratedBox(
-                decoration: BoxDecoration(
-                  border: _getBorder(),
-                  shape: BoxShape.rectangle,
-                  // color: _getColor(),
-                ),
-                child: Center(child: child?.build(context) ?? Text(tableName))),
+            child: Center(child: child ?? Text(tableName)),
           ),
         ),
       ),
     );
-  }
-
-  Color _getColor() {
-    if (widget.controller.getIsSelected) {
-      return widget.controller.getTableDecoration.getActiveBgColor;
-    } else {
-      return widget.controller.getTableDecoration.getInactiveBgColor;
-    }
-  }
-
-  Border _getBorder() {
-    if (widget.controller.getIsSelected) {
-      return Border.all(
-          color: Colors.blueAccent,
-          width: 2,
-          strokeAlign: BorderSide.strokeAlignInside);
-    } else {
-      return Border.all(color: Colors.transparent);
-    }
   }
 
   BorderRadiusGeometry _getRadius() {
@@ -144,5 +123,67 @@ class _TableWidgetState extends State<TableWidget> {
       default:
         return BorderRadius.zero;
     }
+  }
+}
+
+class _TablePainter extends CustomPainter {
+  final TableController controller;
+  _TablePainter({required this.controller});
+  @override
+  void paint(Canvas canvas, Size size) {
+    //Box border style
+    final borderPaint = Paint()
+      ..color = Colors.blueAccent
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
+    //draw border
+    canvas.drawRect(Offset.zero & size, borderPaint);
+
+    //text style
+    const textStyle = TextStyle(
+      color: Colors.white,
+      fontSize: 16,
+      backgroundColor: Colors.blueAccent,
+      height: 1.3,
+      fontStyle: FontStyle.italic,
+    );
+
+    //text span
+    final textSpan = TextSpan(
+      text: controller.child?.widgetType.toString() ?? "NO CHILD",
+      style: textStyle,
+    );
+
+    //text painter
+    final textPainter = TextPainter(
+      text: textSpan,
+      textDirection: TextDirection.ltr,
+      maxLines: 3,
+      ellipsis: '...',
+    );
+
+    //layout the text painter
+    textPainter.layout(
+      minWidth: size.width,
+      maxWidth: size.width,
+    );
+
+    //find the top left of the canvas
+    final topLeft = Offset(
+      0,
+      -textPainter.height,
+    );
+    final textOffset = Offset(
+      topLeft.dx,
+      topLeft.dy,
+    );
+
+    //paint the text
+    textPainter.paint(canvas, textOffset);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
   }
 }

@@ -107,14 +107,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
-  dashboard:
-    dependency: transitive
-    description:
-      name: dashboard
-      sha256: "5c65edf9dd47df436901d5cb268298f349763e48158c424567445f0e8c57a43e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.3+1"
   dropdown_button2:
     dependency: transitive
     description:
@@ -528,5 +520,5 @@ packages:
     source: hosted
     version: "6.3.0"
 sdks:
-  dart: "3.0.3"
+  dart: ">=3.0.3 <4.0.0"
   flutter: ">=3.10.0"
