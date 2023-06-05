@@ -4,6 +4,8 @@ import 'package:table_layout_demo/manager/controllers/controllers.dart';
 import 'package:table_layout_demo/utils/utils.dart';
 import 'package:focusable_control_builder/focusable_control_builder.dart';
 
+import '../manager/dependencies/dependencies.dart';
+
 class TableWidget extends StatefulWidget {
   final TableController controller;
   final VoidCallback? onTap;
@@ -95,7 +97,8 @@ class _TableWidgetState extends State<TableWidget> {
             ? null
             : (widget.onTap ??
                 () {
-                  CanvasController.to.selectTable(widget.controller);
+                  DependencyManager.canvasController
+                      .selectTable(widget.controller);
                   setState(() {});
                 }),
         builder: (context, control) {

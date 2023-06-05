@@ -2,6 +2,7 @@ import 'package:creatego_packages/creatego_packages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_layout_demo/manager/controllers/controllers.dart';
+import 'package:table_layout_demo/manager/dependencies/dependencies.dart';
 import 'package:table_layout_demo/manager/models/models.dart';
 import 'package:table_layout_demo/ui/table_widget.dart';
 import 'package:table_layout_demo/utils/utils.dart';
@@ -11,7 +12,6 @@ class SidebarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => CanvasController());
     return Container(
       decoration: const BoxDecoration(
         border: Border(left: BorderSide(color: Colors.black)),
@@ -278,7 +278,7 @@ class SidebarWidget extends StatelessWidget {
         isPositioned: false,
         isDisabled: false, // isDisabled,
         onTap: () {
-          CanvasController.to.addTable(tableCtr);
+          DependencyManager.canvasController.addTable(tableCtr);
         },
         controller: tableCtr,
       ),

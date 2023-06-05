@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:get_it/get_it.dart';
-import 'package:table_layout_demo/manager/controllers/controllers.dart';
-import 'package:table_layout_demo/manager/dependencies/app_dep.dart';
 import 'package:table_layout_demo/manager/dependencies/dependencies.dart';
 import 'package:table_layout_demo/ui/sidebar_widget.dart';
 import 'package:table_layout_demo/utils/utils.dart';
@@ -12,8 +9,7 @@ import 'ui/grid_canvas_widget.dart';
 void main() {
   DependencyManager.init();
   debugRepaintRainbowEnabled = false;
-  Get.lazyPut(() => CanvasController());
-  Get.lazyPut(() => GeneralTableController());
+
   runApp(const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       showPerformanceOverlay: false,

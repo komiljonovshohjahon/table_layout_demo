@@ -1,8 +1,7 @@
 import 'package:creatego_packages/creatego_packages.dart';
-import 'package:flutter/material.dart';
 import 'package:table_layout_demo/manager/models/models.dart';
 import 'package:table_layout_demo/utils/utils.dart';
-import 'controllers.dart';
+import '../dependencies/dependencies.dart';
 
 class TableController extends ValueNotifier<TableData> {
   /// To assign initial position of the widget, use [index] parameter
@@ -72,34 +71,40 @@ class TableController extends ValueNotifier<TableData> {
     }
     callback?.call();
 
-    // CanvasController.to.update([GridConstants.gridCanvasTableId]);
+    // DependencyManager.canvasController.update([GridConstants.gridCanvasTableId]);
   }
 
   Offset get getCenterOffset {
     return Offset(
-      CanvasController.to.getLeftTopCorner.dx + getSize.width / 2,
-      CanvasController.to.getLeftTopCorner.dy + getSize.height / 2,
+      DependencyManager.canvasController.getLeftTopCorner.dx +
+          getSize.width / 2,
+      DependencyManager.canvasController.getLeftTopCorner.dy +
+          getSize.height / 2,
     );
   }
 
   Offset get getLeftTopCorner {
     return Offset(
-      getOffset.dx + CanvasController.to.getLeftTopCorner.dx,
-      getOffset.dy + CanvasController.to.getLeftTopCorner.dy,
+      getOffset.dx + DependencyManager.canvasController.getLeftTopCorner.dx,
+      getOffset.dy + DependencyManager.canvasController.getLeftTopCorner.dy,
     );
   }
 
   Offset get getRightTopCorner {
     return Offset(
-      getOffset.dx + getSize.width + CanvasController.to.getLeftTopCorner.dx,
-      getOffset.dy + CanvasController.to.getLeftTopCorner.dy,
+      getOffset.dx +
+          getSize.width +
+          DependencyManager.canvasController.getLeftTopCorner.dx,
+      getOffset.dy + DependencyManager.canvasController.getLeftTopCorner.dy,
     );
   }
 
   Offset get getLeftBottomCorner {
     return Offset(
-      getOffset.dx + CanvasController.to.getLeftTopCorner.dx,
-      getOffset.dy + getSize.height + CanvasController.to.getLeftTopCorner.dy,
+      getOffset.dx + DependencyManager.canvasController.getLeftTopCorner.dx,
+      getOffset.dy +
+          getSize.height +
+          DependencyManager.canvasController.getLeftTopCorner.dy,
     );
   }
 
@@ -126,14 +131,14 @@ class TableController extends ValueNotifier<TableData> {
         GlobalKeyConstants.canvasGridKey.getSize!.width - getSize.width, 0);
     callback?.call();
 
-    CanvasController.to.update([GridConstants.gridCanvasId]);
+    DependencyManager.canvasController.update([GridConstants.gridCanvasId]);
   }
 
   void moveToTopLeft() {
     setOffset = const Offset(0, 0);
     callback?.call();
 
-    CanvasController.to.update([GridConstants.gridCanvasId]);
+    DependencyManager.canvasController.update([GridConstants.gridCanvasId]);
   }
 
   void moveToBottomRight() {
@@ -142,7 +147,7 @@ class TableController extends ValueNotifier<TableData> {
         GlobalKeyConstants.canvasGridKey.getSize!.height - getSize.height);
     callback?.call();
 
-    CanvasController.to.update([GridConstants.gridCanvasId]);
+    DependencyManager.canvasController.update([GridConstants.gridCanvasId]);
   }
 
   void moveToBottomLeft() {
@@ -150,7 +155,7 @@ class TableController extends ValueNotifier<TableData> {
         0, GlobalKeyConstants.canvasGridKey.getSize!.height - getSize.height);
     callback?.call();
 
-    CanvasController.to.update([GridConstants.gridCanvasId]);
+    DependencyManager.canvasController.update([GridConstants.gridCanvasId]);
   }
 
   void moveToCenter() {
@@ -160,14 +165,15 @@ class TableController extends ValueNotifier<TableData> {
             getSize.height / 2);
     callback?.call();
 
-    CanvasController.to.update([GridConstants.gridCanvasId]);
+    DependencyManager.canvasController.update([GridConstants.gridCanvasId]);
   }
 
   void changeShape(TableShape shape) {
     value = value.copyWith(
         tableDecoration: value.tableDecoration!.copyWith(tableShape: shape));
     callback?.call();
-    CanvasController.to.update([GridConstants.gridSidebarTablePropsId]);
+    DependencyManager.canvasController
+        .update([GridConstants.gridSidebarTablePropsId]);
   }
 
   void changePosition(Offset o) {

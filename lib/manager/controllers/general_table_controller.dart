@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:table_layout_demo/manager/dependencies/dependencies.dart';
 import 'package:table_layout_demo/utils/utils.dart';
 import 'controllers.dart';
 
@@ -8,9 +9,10 @@ class GeneralTableController extends GetxController {
 
   void onChangeTableSize({String? width, String? height}) {
     if (width != null || height != null) {
-      final getSelectedTable = CanvasController.to.getSelectedTable;
-      final widthTEC = CanvasController.to.widthTEC;
-      final heightTEC = CanvasController.to.heightTEC;
+      final getSelectedTable =
+          DependencyManager.canvasController.getSelectedTable;
+      final widthTEC = DependencyManager.canvasController.widthTEC;
+      final heightTEC = DependencyManager.canvasController.heightTEC;
       if (width != null) {
         if ((width.isNotEmpty && width != "0") && (num.parse(width) > 0)) {
           widthTEC.text = width;
