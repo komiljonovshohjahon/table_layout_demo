@@ -237,8 +237,8 @@ class CanvasController extends GetxController {
                 "size": {"w": child.getSize.width, "h": child.getSize.height},
                 "name": "child_${child.tableId}",
                 "type": child.child.toString(),
-                "option_type": child.child!.options.toString(),
-                "options": child.child!.options.toJson()
+                "option_type": "ButtonOptions",
+                "options": child.child!.options.toMap()
               }
           ]
         }),

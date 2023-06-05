@@ -13,12 +13,12 @@ class CustomTestOptions {
 }
 
 class _State {
-  final double component_width = 100;
-  final double component_height = 100;
+  final double component_width = 600.0;
+  final double component_height = 500.0;
 
   CustomTestOptions get options => CustomTestOptions(
-        component_width: 100,
-        component_height: 100,
+        component_width: 600.0,
+        component_height: 500.0,
       );
 }
 
@@ -58,7 +58,13 @@ class _CustomTestWidget extends StatelessWidget {
   final CustomTestOptions options;
 
   //
-  // final CustomButton button = CustomButton(customOptions: ButtonOptions.fromMap({"text": 'text', "backgroundColor": '#FFffffff', "width": 100, "height": 50, "fontSize": 12, "fontWeight": FontWeight.normal, "textColor": '#FF000000', "borderRadius": BorderRadius.circular(0), "isIconRight": false}));
+  // final CustomButton child_0 = CustomButton(customOptions: ButtonOptions.fromMap({"text": 'Button', "backgroundColor": 4280391411, "width": 100.0, "height": 50.0, "fontSize": 16.0, "fontWeight": 3, "textColor": 4294967295, "borderRadius": 0.0, "isIconRight": 'true'}));
+  //
+  // final CustomButton child_0 = CustomButton(customOptions: ButtonOptions.fromMap({"text": 'Button', "backgroundColor": 4278190080, "width": 100.0, "height": 50.0, "fontSize": 16.0, "fontWeight": 3, "textColor": 4294967295, "borderRadius": 0.0, "isIconRight": 'true'}));
+  //
+  // final CustomButton child_0 = CustomButton(customOptions: ButtonOptions.fromMap({"text": 'Button', "backgroundColor": 4283215696, "width": 100.0, "height": 50.0, "fontSize": 16.0, "fontWeight": 3, "textColor": 4294967295, "borderRadius": 0.0, "isIconRight": 'true'}));
+  //
+  // final CustomButton child_0 = CustomButton(customOptions: ButtonOptions.fromMap({"text": 'Button', "backgroundColor": 4294961979, "width": 100.0, "height": 50.0, "fontSize": 16.0, "fontWeight": 3, "textColor": 4294967295, "borderRadius": 0.0, "isIconRight": 'true'}));
   //
 
   @override
@@ -70,27 +76,80 @@ class _CustomTestWidget extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            left: 85,
-            top: 100,
-            child: SizedBox(
-              width: 100,
-              height: 100,
-              child: CustomButton(
-                customOptions: ButtonOptions.fromMap(
-                  {
-                    "text": 'text',
-                    "backgroundColor": '0xFFB71C1C',
-                    "width": 100,
-                    "height": 50,
-                    "fontSize": 12,
-                    "fontWeight": FontWeight.normal,
-                    "textColor": '0xFF000000',
-                    "borderRadius": 0.0,
-                    "isIconRight": false
-                  },
-                ),
-              ),
-            ), //TODO: make this a proper child
+            left: 35.0,
+            top: 20.0,
+            width: 80.0,
+            height: 80.0,
+            child: Center(
+                child: CustomButton(
+                    customOptions: ButtonOptions.fromMap({
+              "text": 'Button',
+              "backgroundColor": 4280391411,
+              "width": 100.0,
+              "height": 50.0,
+              "fontSize": 16.0,
+              "fontWeight": 3,
+              "textColor": 4294967295,
+              "borderRadius": 0.0,
+              "isIconRight": 'true'
+            }))), //TODO: make this a proper child
+          ),
+          Positioned(
+            left: 0.0,
+            top: 420.0,
+            width: 80.0,
+            height: 80.0,
+            child: Center(
+                child: CustomButton(
+                    customOptions: ButtonOptions.fromMap({
+              "text": 'Button',
+              "backgroundColor": 4278190080,
+              "width": 100.0,
+              "height": 50.0,
+              "fontSize": 16.0,
+              "fontWeight": 3,
+              "textColor": 4294967295,
+              "borderRadius": 0.0,
+              "isIconRight": 'true'
+            }))), //TODO: make this a proper child
+          ),
+          Positioned(
+            left: 520.0,
+            top: 420.0,
+            width: 80.0,
+            height: 80.0,
+            child: Center(
+                child: CustomButton(
+                    customOptions: ButtonOptions.fromMap({
+              "text": 'Button',
+              "backgroundColor": 4283215696,
+              "width": 100.0,
+              "height": 50.0,
+              "fontSize": 16.0,
+              "fontWeight": 3,
+              "textColor": 4294967295,
+              "borderRadius": 0.0,
+              "isIconRight": 'true'
+            }))), //TODO: make this a proper child
+          ),
+          Positioned(
+            left: 0.0,
+            top: 0.0,
+            width: 80.0,
+            height: 80.0,
+            child: Center(
+                child: CustomButton(
+                    customOptions: ButtonOptions.fromMap({
+              "text": 'Button',
+              "backgroundColor": 4294961979,
+              "width": 100.0,
+              "height": 50.0,
+              "fontSize": 16.0,
+              "fontWeight": 3,
+              "textColor": 4294967295,
+              "borderRadius": 0.0,
+              "isIconRight": 'true'
+            }))), //TODO: make this a proper child
           ),
         ],
       ),

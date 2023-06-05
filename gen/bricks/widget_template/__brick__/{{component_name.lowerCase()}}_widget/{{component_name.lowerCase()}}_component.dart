@@ -59,9 +59,9 @@ class _Custom{{component_name.pascalCase()}}Widget extends StatelessWidget {
 
   final Custom{{component_name.pascalCase()}}Options options;
 
-  // {{#children}}
-  // final {{{type}}} {{name}} = {{{type}}}(customOptions: {{option_type}}.fromMap({{{options}}}));
-  // {{/children}}
+  {{#children}}
+  final {{{type}}} {{name}} = {{{type}}}(customOptions: {{option_type}}.fromMap({{{options}}}));
+  {{/children}}
 
 
   @override
@@ -76,8 +76,10 @@ class _Custom{{component_name.pascalCase()}}Widget extends StatelessWidget {
       Positioned(
         left: {{offset.x}},
         top: {{offset.y}},
+        width: {{size.w}},
+        height: {{size.h}},
         child:
-        SizedBox(width: {{size.w}}, height: {{size.h}}, child: {{type}}(customOptions: {{option_type}}.fromMap({{{options}}}))),//TODO: make this a proper child
+        Center( child: {{type}}(customOptions: {{option_type}}.fromMap({{{options}}}))),
       ),
   {{/children}}
     ],
