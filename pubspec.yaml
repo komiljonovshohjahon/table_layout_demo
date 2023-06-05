@@ -39,6 +39,7 @@ dependencies:
   # Internal packages
   creatego_packages:
     path: ../creatego_packages
+  focusable_control_builder: ^1.0.1+1
 
 dev_dependencies:
   flutter_test:

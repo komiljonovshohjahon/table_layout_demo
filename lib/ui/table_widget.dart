@@ -2,12 +2,13 @@ import 'package:creatego_packages/creatego_packages.dart';
 import 'package:flutter/material.dart';
 import 'package:table_layout_demo/manager/controllers/controllers.dart';
 import 'package:table_layout_demo/utils/utils.dart';
+import 'package:focusable_control_builder/focusable_control_builder.dart';
 
 class TableWidget extends StatefulWidget {
   final TableController controller;
   final VoidCallback? onTap;
   bool? isDisabled;
-  bool isPositioned = true;
+  final bool isPositioned;
   TableWidget(
       {Key? key,
       required this.controller,
@@ -56,6 +57,7 @@ class _TableWidgetState extends State<TableWidget> {
 
   Widget _getPositionedWidget() {
     bool isSelected = widget.controller.getIsSelected;
+    logger("Table ${widget.controller.tableId} is selected: $isSelected");
     if (isSelected) {
       return Positioned(
           top: widget.controller.getOffset.dy,
@@ -63,11 +65,7 @@ class _TableWidgetState extends State<TableWidget> {
           width: widget.controller.getSize.width,
           height: widget.controller.getSize.height,
           child: GestureDetector(
-              onPanUpdate: onPanUpdate,
-              child: CustomPaint(
-                  foregroundPainter:
-                      _TablePainter(controller: widget.controller),
-                  child: _getPressableTable())));
+              onPanUpdate: onPanUpdate, child: _getPressableTable(isSelected)));
     }
     return Positioned(
       top: widget.controller.getOffset.dy,
@@ -90,29 +88,26 @@ class _TableWidgetState extends State<TableWidget> {
     );
   }
 
-  Widget _getPressableTable() {
-    String tableName = widget.controller.getTableName;
+  Widget _getPressableTable([bool isSelected = false]) {
     IWidget? child = widget.controller.child;
-    return GestureDetector(
-      onTap: widget.isDisabled!
-          ? null
-          : (widget.onTap ??
-              () {
-                CanvasController.to.selectTable(widget.controller);
-                setState(() {});
-              }),
-      child: Opacity(
-        opacity: widget.isDisabled! ? 0.5 : 1,
-        child: ClipRRect(
-          borderRadius: _getRadius(),
-          child: SizedBox(
-            width: widget.controller.getSize.width,
-            height: widget.controller.getSize.height,
-            child: Center(child: child ?? Text(tableName)),
-          ),
-        ),
-      ),
-    );
+    return FocusableControlBuilder(
+        onPressed: widget.isDisabled!
+            ? null
+            : (widget.onTap ??
+                () {
+                  CanvasController.to.selectTable(widget.controller);
+                  setState(() {});
+                }),
+        builder: (context, control) {
+          return CustomPaint(
+              foregroundPainter: _TablePainter(
+                controller: widget.controller,
+                isHovered: control.isHovered,
+                isSelected: isSelected,
+              ),
+              child:
+                  Center(child: child ?? const Text("CANNOT FIND THE CHILD")));
+        });
   }
 
   BorderRadiusGeometry _getRadius() {
@@ -128,22 +123,34 @@ class _TableWidgetState extends State<TableWidget> {
 
 class _TablePainter extends CustomPainter {
   final TableController controller;
-  _TablePainter({required this.controller});
+  final bool isHovered;
+  final bool isSelected;
+  _TablePainter(
+      {required this.controller,
+      this.isHovered = false,
+      this.isSelected = false});
   @override
   void paint(Canvas canvas, Size size) {
+    if (!isSelected && !isHovered) {
+      return;
+    }
+    Color mainColor = Colors.blueAccent;
+    if (isHovered && !isSelected) {
+      mainColor = Colors.greenAccent;
+    }
     //Box border style
     final borderPaint = Paint()
-      ..color = Colors.blueAccent
+      ..color = mainColor
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
     //draw border
     canvas.drawRect(Offset.zero & size, borderPaint);
 
     //text style
-    const textStyle = TextStyle(
+    final textStyle = TextStyle(
       color: Colors.white,
       fontSize: 16,
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: mainColor,
       height: 1.3,
       fontStyle: FontStyle.italic,
     );
@@ -184,6 +191,6 @@ class _TablePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
+    return true;
   }
 }

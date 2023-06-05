@@ -271,6 +271,8 @@ class SidebarWidget extends StatelessWidget {
         tableId: tableId,
         tableDecoration: TableDecoration(child: child.copy()));
     return Container(
+      width: 80,
+      height: 80,
       color: Colors.black38,
       child: TableWidget(
         isPositioned: false,
