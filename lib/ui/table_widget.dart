@@ -9,7 +9,7 @@ import '../manager/dependencies/dependencies.dart';
 class TableWidget extends StatefulWidget {
   final TableController controller;
   final VoidCallback? onTap;
-  bool? isDisabled;
+  final bool? isDisabled;
   final bool isPositioned;
   TableWidget(
       {Key? key,
@@ -97,8 +97,7 @@ class _TableWidgetState extends State<TableWidget> {
             ? null
             : (widget.onTap ??
                 () {
-                  DependencyManager.canvasController
-                      .selectTable(widget.controller);
+                  Manager.canvasController.selectTable(widget.controller);
                   setState(() {});
                 }),
         builder: (context, control) {

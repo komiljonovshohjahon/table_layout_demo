@@ -4,14 +4,14 @@ import 'package:table_layout_demo/manager/dependencies/dependencies.dart';
 
 import '../controllers/controllers.dart';
 
-class DependencyManager {
-  static final DependencyManager _instance = DependencyManager._internal();
+class Manager {
+  static final Manager _instance = Manager._internal();
 
-  factory DependencyManager() {
+  factory Manager() {
     return _instance;
   }
 
-  DependencyManager._internal();
+  Manager._internal();
 
   static final _getIt = GetIt.instance;
 
@@ -26,6 +26,9 @@ class DependencyManager {
   static GeneralTableController get generalTableController =>
       _getIt<GeneralTableController>();
 
+  static final ConfigDep _configDep = ConfigDep();
+  static ConfigDep get configDep => _getIt<ConfigDep>();
+
   //It is run in main.dart
   static void init() {
     _getIt.registerSingleton<AppDep>(_appDep);
@@ -35,5 +38,7 @@ class DependencyManager {
         Get.put<GeneralTableController>(GeneralTableController());
     _getIt.registerSingleton<CanvasController>(_cController);
     _getIt.registerSingleton<GeneralTableController>(_gtController);
+
+    _getIt.registerSingleton<ConfigDep>(_configDep);
   }
 }

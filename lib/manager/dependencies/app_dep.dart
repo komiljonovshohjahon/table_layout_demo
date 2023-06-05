@@ -15,6 +15,6 @@ class AppDep {
   //create getter for singleton
   static AppDep get instance => _singleton;
 
-  //create dependencies
+  /// runs setState of the MaterialApp
   late final VoidCallback restart;
 }

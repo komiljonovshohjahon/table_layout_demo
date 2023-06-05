@@ -63,30 +63,28 @@ class TableController extends ValueNotifier<TableData> {
   void changeSize({double? width, double? height, bool isAsCellIndex = false}) {
     if (isAsCellIndex) {
       value = value.copyWith(
-        width: GridSettingsConstants.defaultGridCellSize.width * width!,
-        height: GridSettingsConstants.defaultGridCellSize.height * height!,
+        width: Manager.configDep.sizes.defaultGridCellSize.width * width!,
+        height: Manager.configDep.sizes.defaultGridCellSize.height * height!,
       );
     } else {
       value = value.copyWith(width: width, height: height);
     }
     callback?.call();
 
-    // DependencyManager.canvasController.update([GridConstants.gridCanvasTableId]);
+    // Manager.canvasController.update([GridConstants.gridCanvasTableId]);
   }
 
   Offset get getCenterOffset {
     return Offset(
-      DependencyManager.canvasController.getLeftTopCorner.dx +
-          getSize.width / 2,
-      DependencyManager.canvasController.getLeftTopCorner.dy +
-          getSize.height / 2,
+      Manager.canvasController.getLeftTopCorner.dx + getSize.width / 2,
+      Manager.canvasController.getLeftTopCorner.dy + getSize.height / 2,
     );
   }
 
   Offset get getLeftTopCorner {
     return Offset(
-      getOffset.dx + DependencyManager.canvasController.getLeftTopCorner.dx,
-      getOffset.dy + DependencyManager.canvasController.getLeftTopCorner.dy,
+      getOffset.dx + Manager.canvasController.getLeftTopCorner.dx,
+      getOffset.dy + Manager.canvasController.getLeftTopCorner.dy,
     );
   }
 
@@ -94,17 +92,17 @@ class TableController extends ValueNotifier<TableData> {
     return Offset(
       getOffset.dx +
           getSize.width +
-          DependencyManager.canvasController.getLeftTopCorner.dx,
-      getOffset.dy + DependencyManager.canvasController.getLeftTopCorner.dy,
+          Manager.canvasController.getLeftTopCorner.dx,
+      getOffset.dy + Manager.canvasController.getLeftTopCorner.dy,
     );
   }
 
   Offset get getLeftBottomCorner {
     return Offset(
-      getOffset.dx + DependencyManager.canvasController.getLeftTopCorner.dx,
+      getOffset.dx + Manager.canvasController.getLeftTopCorner.dx,
       getOffset.dy +
           getSize.height +
-          DependencyManager.canvasController.getLeftTopCorner.dy,
+          Manager.canvasController.getLeftTopCorner.dy,
     );
   }
 
@@ -118,81 +116,79 @@ class TableController extends ValueNotifier<TableData> {
 
   bool get isTouchingCanvasRight {
     return getOffset.dx + getSize.width ==
-        GlobalKeyConstants.canvasGridKey.getSize!.width;
+        GridConstants.canvasGridKey.getSize!.width;
   }
 
   bool get isTouchingCanvasBottom {
     return getOffset.dy + getSize.height ==
-        GlobalKeyConstants.canvasGridKey.getSize!.height;
+        GridConstants.canvasGridKey.getSize!.height;
   }
 
   void moveToTopRight() {
-    setOffset = Offset(
-        GlobalKeyConstants.canvasGridKey.getSize!.width - getSize.width, 0);
+    setOffset =
+        Offset(GridConstants.canvasGridKey.getSize!.width - getSize.width, 0);
     callback?.call();
 
-    DependencyManager.canvasController.update([GridConstants.gridCanvasId]);
+    Manager.canvasController.update([GridConstants.gridCanvasId]);
   }
 
   void moveToTopLeft() {
     setOffset = const Offset(0, 0);
     callback?.call();
 
-    DependencyManager.canvasController.update([GridConstants.gridCanvasId]);
+    Manager.canvasController.update([GridConstants.gridCanvasId]);
   }
 
   void moveToBottomRight() {
     setOffset = Offset(
-        GlobalKeyConstants.canvasGridKey.getSize!.width - getSize.width,
-        GlobalKeyConstants.canvasGridKey.getSize!.height - getSize.height);
+        GridConstants.canvasGridKey.getSize!.width - getSize.width,
+        GridConstants.canvasGridKey.getSize!.height - getSize.height);
     callback?.call();
 
-    DependencyManager.canvasController.update([GridConstants.gridCanvasId]);
+    Manager.canvasController.update([GridConstants.gridCanvasId]);
   }
 
   void moveToBottomLeft() {
-    setOffset = Offset(
-        0, GlobalKeyConstants.canvasGridKey.getSize!.height - getSize.height);
+    setOffset =
+        Offset(0, GridConstants.canvasGridKey.getSize!.height - getSize.height);
     callback?.call();
 
-    DependencyManager.canvasController.update([GridConstants.gridCanvasId]);
+    Manager.canvasController.update([GridConstants.gridCanvasId]);
   }
 
   void moveToCenter() {
     setOffset = Offset(
-        GlobalKeyConstants.canvasGridKey.getSize!.width / 2 - getSize.width / 2,
-        GlobalKeyConstants.canvasGridKey.getSize!.height / 2 -
-            getSize.height / 2);
+        GridConstants.canvasGridKey.getSize!.width / 2 - getSize.width / 2,
+        GridConstants.canvasGridKey.getSize!.height / 2 - getSize.height / 2);
     callback?.call();
 
-    DependencyManager.canvasController.update([GridConstants.gridCanvasId]);
+    Manager.canvasController.update([GridConstants.gridCanvasId]);
   }
 
   void changeShape(TableShape shape) {
     value = value.copyWith(
         tableDecoration: value.tableDecoration!.copyWith(tableShape: shape));
     callback?.call();
-    DependencyManager.canvasController
-        .update([GridConstants.gridSidebarTablePropsId]);
+    Manager.canvasController.update([GridConstants.gridSidebarTablePropsId]);
   }
 
   void changePosition(Offset o) {
-    Offset? canvasPosition = GlobalKeyConstants.canvasGridKey.getPosition;
+    Offset? canvasPosition = GridConstants.canvasGridKey.getPosition;
 
     if (canvasPosition != null) {
       Offset off = Offset(o.dx - canvasPosition.dx, o.dy - canvasPosition.dy);
 
       final yRemainder =
-          (off.dy % GridSettingsConstants.defaultGridCellSize.height);
+          (off.dy % Manager.configDep.sizes.defaultGridCellSize.height);
       final xRemainder =
-          (off.dx % GridSettingsConstants.defaultGridCellSize.width);
+          (off.dx % Manager.configDep.sizes.defaultGridCellSize.width);
 
-      final halfCell = GridSettingsConstants.defaultGridCellSize.width / 2;
+      final halfCell = Manager.configDep.sizes.defaultGridCellSize.width / 2;
       if (xRemainder != 0) {
         double dx = off.dx;
         if (halfCell < xRemainder) {
           final temp =
-              GridSettingsConstants.defaultGridCellSize.width - xRemainder;
+              Manager.configDep.sizes.defaultGridCellSize.width - xRemainder;
           dx += temp;
         } else if (halfCell > xRemainder) {
           final temp = halfCell - xRemainder;
@@ -205,7 +201,7 @@ class TableController extends ValueNotifier<TableData> {
         double dy = off.dy;
         if (halfCell < yRemainder) {
           final temp =
-              GridSettingsConstants.defaultGridCellSize.width - yRemainder;
+              Manager.configDep.sizes.defaultGridCellSize.width - yRemainder;
           dy += temp;
         } else if (halfCell > yRemainder) {
           final temp = halfCell - yRemainder;
@@ -216,25 +212,23 @@ class TableController extends ValueNotifier<TableData> {
       }
 
       //Check if the table goes off Canvas boundaries
-      if (!GridSettingsConstants.canItemGoOffCanvasBoundaries) {
+      if (!Manager.configDep.settings.canItemGoOffCanvasBoundaries) {
         //Left
         if (off.dx < 0) off = Offset(0, off.dy);
         //Top
         if (off.dy < 0) off = Offset(off.dx, 0);
         //Right
         if (off.dx + getSize.width >
-            GlobalKeyConstants.canvasGridKey.getSize!.width) {
+            GridConstants.canvasGridKey.getSize!.width) {
           off = Offset(
-              GlobalKeyConstants.canvasGridKey.getSize!.width - getSize.width,
+              GridConstants.canvasGridKey.getSize!.width - getSize.width,
               off.dy);
         }
         //Bottom
         if (off.dy + getSize.height >
-            GlobalKeyConstants.canvasGridKey.getSize!.height) {
-          off = Offset(
-              off.dx,
-              GlobalKeyConstants.canvasGridKey.getSize!.height -
-                  getSize.height);
+            GridConstants.canvasGridKey.getSize!.height) {
+          off = Offset(off.dx,
+              GridConstants.canvasGridKey.getSize!.height - getSize.height);
         }
       }
       setOffset = off;

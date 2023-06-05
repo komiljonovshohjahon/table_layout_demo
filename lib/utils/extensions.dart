@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'utils.dart';
+import 'package:table_layout_demo/manager/dependencies/dependencies.dart';
 
 extension SizeHelpers on Size {
   Size get toCellIndex => Size(
-      width / GridSettingsConstants.defaultGridCellSize.width,
-      height / GridSettingsConstants.defaultGridCellSize.height);
+      width / Manager.configDep.sizes.defaultGridCellSize.width,
+      height / Manager.configDep.sizes.defaultGridCellSize.height);
 
   Size get toSizeFromCellIndex => Size(
-      width * GridSettingsConstants.defaultGridCellSize.width,
-      height * GridSettingsConstants.defaultGridCellSize.height);
+      width * Manager.configDep.sizes.defaultGridCellSize.width,
+      height * Manager.configDep.sizes.defaultGridCellSize.height);
 }
 
 extension OffsetHelpers on Offset {
   Offset get toCellIndex {
-    return Offset(dx / GridSettingsConstants.defaultGridCellSize.width,
-        dy / GridSettingsConstants.defaultGridCellSize.height);
+    return Offset(dx / Manager.configDep.sizes.defaultGridCellSize.width,
+        dy / Manager.configDep.sizes.defaultGridCellSize.height);
   }
 
   Offset get toOffsetFromCellIndex {
-    final off = Offset(dx * GridSettingsConstants.defaultGridCellSize.width,
-        dy * GridSettingsConstants.defaultGridCellSize.height);
+    final off = Offset(dx * Manager.configDep.sizes.defaultGridCellSize.width,
+        dy * Manager.configDep.sizes.defaultGridCellSize.height);
     return off;
   }
 }

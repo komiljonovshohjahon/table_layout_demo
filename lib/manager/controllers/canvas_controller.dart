@@ -4,13 +4,13 @@ import 'dart:io';
 import 'package:creatego_packages/creatego_packages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:table_layout_demo/manager/dependencies/dependencies.dart';
 import 'package:table_layout_demo/ui/table_widget.dart';
 import 'package:table_layout_demo/utils/utils.dart';
 import 'controllers.dart';
 export '../../utils/logger.dart';
 
 class CanvasController extends GetxController {
-  static CanvasController get to => Get.find();
   final TextEditingController heightTEC = TextEditingController();
   final TextEditingController widthTEC = TextEditingController();
 
@@ -21,14 +21,14 @@ class CanvasController extends GetxController {
   void moveTableToCanvasRightCorner() {}
 
   Offset get getLeftTopCorner {
-    return GlobalKeyConstants.canvasGridKey.getPosition ?? Offset.zero;
+    return GridConstants.canvasGridKey.getPosition ?? Offset.zero;
   }
 
   Offset get getRightTopCorner {
     return Offset(
       getLeftTopCorner.dx +
-          GridSettingsConstants.defaultGridCellSize.width *
-              GridSettingsConstants.defaultGridCells.dx,
+          Manager.configDep.sizes.defaultGridCellSize.width *
+              Manager.configDep.sizes.defaultGridCells.dx,
       getLeftTopCorner.dy,
     );
   }
@@ -37,19 +37,19 @@ class CanvasController extends GetxController {
     return Offset(
       getLeftTopCorner.dx,
       getLeftTopCorner.dy +
-          GridSettingsConstants.defaultGridCellSize.height *
-              GridSettingsConstants.defaultGridCells.dy,
+          Manager.configDep.sizes.defaultGridCellSize.height *
+              Manager.configDep.sizes.defaultGridCells.dy,
     );
   }
 
   Offset get getRightBottomCorner {
     return Offset(
       getLeftTopCorner.dx +
-          GridSettingsConstants.defaultGridCellSize.width *
-              GridSettingsConstants.defaultGridCells.dx,
+          Manager.configDep.sizes.defaultGridCellSize.width *
+              Manager.configDep.sizes.defaultGridCells.dx,
       getLeftTopCorner.dy +
-          GridSettingsConstants.defaultGridCellSize.height *
-              GridSettingsConstants.defaultGridCells.dy,
+          Manager.configDep.sizes.defaultGridCellSize.height *
+              Manager.configDep.sizes.defaultGridCells.dy,
     );
   }
 
@@ -170,8 +170,8 @@ class CanvasController extends GetxController {
 
     //get the block size
     final Size canvasSize = Size(
-        GridSettingsConstants.defaultGridCells.toOffsetFromCellIndex.dx,
-        GridSettingsConstants.defaultGridCells.toOffsetFromCellIndex.dy);
+        Manager.configDep.sizes.defaultGridCells.toOffsetFromCellIndex.dx,
+        Manager.configDep.sizes.defaultGridCells.toOffsetFromCellIndex.dy);
 
     //get the children of the widget
     final List<TableController> childrenControllers =

@@ -17,7 +17,7 @@ class SidebarWidget extends StatelessWidget {
         border: Border(left: BorderSide(color: Colors.black)),
         color: Colors.white,
       ),
-      width: GridSettingsConstants.defaultSidebarWidth,
+      width: Manager.configDep.sizes.defaultSidebarWidth,
       height: MediaQuery.of(context).size.height,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -196,7 +196,7 @@ class SidebarWidget extends StatelessWidget {
           height: 30,
           child: TextFormField(
             onFieldSubmitted: (value) =>
-                GeneralTableController.to.onChangeTableSize(width: value),
+                Manager.generalTableController.onChangeTableSize(width: value),
             keyboardType: TextInputType.number,
             controller: controller.widthTEC,
             decoration: const InputDecoration(
@@ -220,7 +220,7 @@ class SidebarWidget extends StatelessWidget {
           height: 30,
           child: TextFormField(
             onFieldSubmitted: (value) =>
-                GeneralTableController.to.onChangeTableSize(height: value),
+                Manager.generalTableController.onChangeTableSize(height: value),
             keyboardType: TextInputType.number,
             controller: controller.heightTEC,
             decoration: const InputDecoration(
@@ -235,21 +235,8 @@ class SidebarWidget extends StatelessWidget {
 
     if (controller.getSelectedTable != null) {
       if (controller.getSelectedTable!.controller.child != null) {
-        for (int i = 0;
-            i < controller.getSelectedTable!.controller.child!.resources.length;
-            i++) {
-          final resource =
-              controller.getSelectedTable!.controller.child!.resources[i];
-          params.add(Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              getTitle("Option ${i + 1}"),
-              Flexible(
-                child: resource,
-              ),
-            ],
-          ));
-        }
+        params.add(
+            controller.getSelectedTable!.controller.child!.resourcesWidget);
       }
     }
 
@@ -278,7 +265,7 @@ class SidebarWidget extends StatelessWidget {
         isPositioned: false,
         isDisabled: false, // isDisabled,
         onTap: () {
-          DependencyManager.canvasController.addTable(tableCtr);
+          Manager.canvasController.addTable(tableCtr);
         },
         controller: tableCtr,
       ),

@@ -1,5 +1,6 @@
 import 'package:creatego_packages/creatego_packages.dart';
 import 'package:flutter/material.dart';
+import 'package:table_layout_demo/manager/dependencies/dependencies.dart';
 import 'package:table_layout_demo/utils/utils.dart';
 
 class TableDecoration {
@@ -96,7 +97,7 @@ class TableData {
     this.tableDecoration,
     required this.tableId,
   }) {
-    size ??= GridSettingsConstants.defaultTableSize;
+    size ??= Manager.configDep.sizes.defaultTableSize;
     offset ??= const Offset(0, 0);
     tableName ??= 'Table ${key.toString()}';
     isSelected ??= false;

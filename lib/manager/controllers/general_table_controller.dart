@@ -5,14 +5,11 @@ import 'package:table_layout_demo/utils/utils.dart';
 import 'controllers.dart';
 
 class GeneralTableController extends GetxController {
-  static GeneralTableController get to => Get.find();
-
   void onChangeTableSize({String? width, String? height}) {
     if (width != null || height != null) {
-      final getSelectedTable =
-          DependencyManager.canvasController.getSelectedTable;
-      final widthTEC = DependencyManager.canvasController.widthTEC;
-      final heightTEC = DependencyManager.canvasController.heightTEC;
+      final getSelectedTable = Manager.canvasController.getSelectedTable;
+      final widthTEC = Manager.canvasController.widthTEC;
+      final heightTEC = Manager.canvasController.heightTEC;
       if (width != null) {
         if ((width.isNotEmpty && width != "0") && (num.parse(width) > 0)) {
           widthTEC.text = width;
@@ -27,7 +24,7 @@ class GeneralTableController extends GetxController {
           }
         }
         if (double.parse(widthTEC.text) >
-            GridSettingsConstants.defaultGridCells.dx) {
+            Manager.configDep.sizes.defaultGridCells.dx) {
           ScaffoldMessenger.of(Get.key.currentContext!).showSnackBar(SnackBar(
               action: SnackBarAction(
                 onPressed: () {
@@ -55,7 +52,7 @@ class GeneralTableController extends GetxController {
           }
         }
         if (double.parse(heightTEC.text) >
-            GridSettingsConstants.defaultGridCells.dy) {
+            Manager.configDep.sizes.defaultGridCells.dy) {
           ScaffoldMessenger.of(Get.key.currentContext!).showSnackBar(SnackBar(
               action: SnackBarAction(
                 onPressed: () {

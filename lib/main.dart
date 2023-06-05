@@ -7,7 +7,7 @@ import 'package:table_layout_demo/utils/utils.dart';
 import 'ui/grid_canvas_widget.dart';
 
 void main() {
-  DependencyManager.init();
+  Manager.init();
   debugRepaintRainbowEnabled = false;
 
   runApp(const GetMaterialApp(
@@ -109,7 +109,7 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    DependencyManager.appDep.restart = restart;
+    Manager.appDep.restart = restart;
   }
 
   @override
@@ -129,28 +129,28 @@ class _HomepageState extends State<Homepage> {
               onPressed: () async {
                 final Map? result = await _showSetBlockSizeDialog(
                     context,
-                    GridSettingsConstants
-                        .defaultGridCells.toOffsetFromCellIndex.dx,
-                    GridSettingsConstants
-                        .defaultGridCells.toOffsetFromCellIndex.dy,
-                    GridSettingsConstants.columnCount);
+                    Manager.configDep.sizes.defaultGridCells
+                        .toOffsetFromCellIndex.dx,
+                    Manager.configDep.sizes.defaultGridCells
+                        .toOffsetFromCellIndex.dy,
+                    Manager.configDep.sizes.columnCount);
                 if (result != null) {
                   double? width = result["width"];
                   if (width != null) {
-                    width =
-                        width / GridSettingsConstants.defaultGridCellSize.width;
+                    width = width /
+                        Manager.configDep.sizes.defaultGridCellSize.width;
                   }
                   double? height = result["height"];
                   if (height != null) {
                     height = height /
-                        GridSettingsConstants.defaultGridCellSize.width;
+                        Manager.configDep.sizes.defaultGridCellSize.width;
                   }
                   final colCount = result["colCount"];
                   if (colCount != null) {
-                    GridSettingsConstants.columnCount = colCount;
+                    Manager.configDep.sizes.columnCount = colCount;
                   }
                   if (width != null && height != null) {
-                    GridSettingsConstants.defaultGridCells =
+                    Manager.configDep.sizes.defaultGridCells =
                         Offset(width, height);
                   }
                   restart();
@@ -161,7 +161,7 @@ class _HomepageState extends State<Homepage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          DependencyManager.appDep.restart();
+          Manager.appDep.restart();
         },
         label: const Text(
           'Test Button',
@@ -175,10 +175,10 @@ class _HomepageState extends State<Homepage> {
           Expanded(
             child: Align(
               child: SizedBox(
-                width: (GridSettingsConstants.defaultGridCellSize.width *
-                    GridSettingsConstants.defaultGridCells.dx),
-                height: (GridSettingsConstants.defaultGridCellSize.height *
-                    GridSettingsConstants.defaultGridCells.dy),
+                width: (Manager.configDep.sizes.defaultGridCellSize.width *
+                    Manager.configDep.sizes.defaultGridCells.dx),
+                height: (Manager.configDep.sizes.defaultGridCellSize.height *
+                    Manager.configDep.sizes.defaultGridCells.dy),
                 child: GridCanvas(),
               ),
             ),
