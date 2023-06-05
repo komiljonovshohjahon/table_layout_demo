@@ -114,77 +114,76 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    // final BoxConstraints constraints = BoxConstraints(
-    //   maxWidth: Get.width,
-    //   maxHeight: Get.height,
-    // );
-    // logger('Screen size : => ${constraints.maxWidth} ${constraints.maxHeight}');
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-              ),
-              onPressed: () async {
-                final Map? result = await _showSetBlockSizeDialog(
-                    context,
-                    Manager.configDep.sizes.defaultGridCells
-                        .toOffsetFromCellIndex.dx,
-                    Manager.configDep.sizes.defaultGridCells
-                        .toOffsetFromCellIndex.dy,
-                    Manager.configDep.sizes.columnCount);
-                if (result != null) {
-                  double? width = result["width"];
-                  if (width != null) {
-                    width = width /
-                        Manager.configDep.sizes.defaultGridCellSize.width;
+    return GestureDetector(
+      //// Handles the outside click to deselect the selected table
+      onTap: Manager.canvasController.clearSelectedTable,
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () async {
+                  final Map? result = await _showSetBlockSizeDialog(
+                      context,
+                      Manager.configDep.sizes.defaultGridCells
+                          .toOffsetFromCellIndex.dx,
+                      Manager.configDep.sizes.defaultGridCells
+                          .toOffsetFromCellIndex.dy,
+                      Manager.configDep.sizes.columnCount);
+                  if (result != null) {
+                    double? width = result["width"];
+                    if (width != null) {
+                      width = width /
+                          Manager.configDep.sizes.defaultGridCellSize.width;
+                    }
+                    double? height = result["height"];
+                    if (height != null) {
+                      height = height /
+                          Manager.configDep.sizes.defaultGridCellSize.width;
+                    }
+                    final colCount = result["colCount"];
+                    if (colCount != null) {
+                      Manager.configDep.sizes.columnCount = colCount;
+                    }
+                    if (width != null && height != null) {
+                      Manager.configDep.sizes.defaultGridCells =
+                          Offset(width, height);
+                    }
+                    restart();
                   }
-                  double? height = result["height"];
-                  if (height != null) {
-                    height = height /
-                        Manager.configDep.sizes.defaultGridCellSize.width;
-                  }
-                  final colCount = result["colCount"];
-                  if (colCount != null) {
-                    Manager.configDep.sizes.columnCount = colCount;
-                  }
-                  if (width != null && height != null) {
-                    Manager.configDep.sizes.defaultGridCells =
-                        Offset(width, height);
-                  }
-                  restart();
-                }
-              },
-              child: const Text("Set Screen size")),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Manager.appDep.restart();
-        },
-        label: const Text(
-          'Test Button',
-          style: TextStyle(color: Colors.white, fontSize: 20),
+                },
+                child: const Text("Set Screen size")),
+          ],
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      backgroundColor: Colors.black26,
-      body: Row(
-        children: [
-          Expanded(
-            child: Align(
-              child: SizedBox(
-                width: (Manager.configDep.sizes.defaultGridCellSize.width *
-                    Manager.configDep.sizes.defaultGridCells.dx),
-                height: (Manager.configDep.sizes.defaultGridCellSize.height *
-                    Manager.configDep.sizes.defaultGridCells.dy),
-                child: GridCanvas(),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Manager.appDep.restart();
+          },
+          label: const Text(
+            'Test Button',
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+        backgroundColor: Colors.black26,
+        body: Row(
+          children: [
+            Expanded(
+              child: Align(
+                child: SizedBox(
+                  width: (Manager.configDep.sizes.defaultGridCellSize.width *
+                      Manager.configDep.sizes.defaultGridCells.dx),
+                  height: (Manager.configDep.sizes.defaultGridCellSize.height *
+                      Manager.configDep.sizes.defaultGridCells.dy),
+                  child: GridCanvas(),
+                ),
               ),
             ),
-          ),
-          const SidebarWidget(),
-        ],
+            const SidebarWidget(),
+          ],
+        ),
       ),
     );
   }

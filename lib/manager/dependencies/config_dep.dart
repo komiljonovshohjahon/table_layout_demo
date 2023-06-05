@@ -58,7 +58,6 @@ class _GridSettings {
 
 class _GridDecorations {
   Color defaultGridColor = const Color(0xFFFF0000).withOpacity(.1);
-  String? defaultGridBackgroundImage = null; //"assets/floor.jpg";
   Color defaultBackgroundColor = Colors.white;
   Color columnColor = const Color(0xFFFF0000).withOpacity(.1);
 }
