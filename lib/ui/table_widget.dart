@@ -147,10 +147,9 @@ class _TablePainter extends CustomPainter {
     canvas.drawRect(Offset.zero & size, borderPaint);
 
     //text style
-    final textStyle = TextStyle(
+    const textStyle = TextStyle(
       color: Colors.white,
       fontSize: 16,
-      backgroundColor: mainColor,
       height: 1.3,
       fontStyle: FontStyle.italic,
     );
@@ -184,6 +183,18 @@ class _TablePainter extends CustomPainter {
       topLeft.dx,
       topLeft.dy,
     );
+
+    //draw the background and border for the textPainter
+    final backgroundPaint = Paint()
+      ..color = mainColor
+      ..style = PaintingStyle.fill;
+    final backgroundRect = Rect.fromLTWH(
+      textOffset.dx,
+      textOffset.dy,
+      textPainter.width,
+      textPainter.height,
+    );
+    canvas.drawRect(backgroundRect, backgroundPaint);
 
     //paint the text
     textPainter.paint(canvas, textOffset);

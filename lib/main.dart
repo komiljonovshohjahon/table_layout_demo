@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:table_layout_demo/manager/controllers/controllers.dart';
+import 'package:table_layout_demo/manager/dependencies/app_dep.dart';
+import 'package:table_layout_demo/manager/dependencies/dependencies.dart';
 import 'package:table_layout_demo/ui/sidebar_widget.dart';
 import 'package:table_layout_demo/utils/utils.dart';
 import 'ui/grid_canvas_widget.dart';
 
 void main() {
+  DependencyManager.init();
   debugRepaintRainbowEnabled = false;
   Get.lazyPut(() => CanvasController());
   Get.lazyPut(() => GeneralTableController());
@@ -26,6 +30,7 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   void restart() {
     setState(() {});
+    logger("APP RESTART", "APP");
   }
 
   Future<Map?> _showSetBlockSizeDialog(
@@ -106,6 +111,12 @@ class _HomepageState extends State<Homepage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    DependencyManager.appDep.restart = restart;
+  }
+
+  @override
   Widget build(BuildContext context) {
     // final BoxConstraints constraints = BoxConstraints(
     //   maxWidth: Get.width,
@@ -154,7 +165,7 @@ class _HomepageState extends State<Homepage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          logger(CanvasController.to.getSelectedTable?.controller.getOffset);
+          DependencyManager.appDep.restart();
         },
         label: const Text(
           'Test Button',
