@@ -8,9 +8,9 @@ import '../manager/dependencies/dependencies.dart';
 
 class TableWidget extends StatefulWidget {
   final TableController controller;
-  final VoidCallback? onTap;
   final bool? isDisabled;
   final bool isPositioned;
+  final VoidCallback? onTap;
   TableWidget(
       {Key? key,
       required this.controller,
@@ -32,7 +32,6 @@ class _TableWidgetState extends State<TableWidget> {
     super.initState();
     ctr = ValueNotifier(widget.controller);
     widget.controller.setCallback = () {
-      logger("Call back called");
       setState(() {});
     };
   }
@@ -59,7 +58,6 @@ class _TableWidgetState extends State<TableWidget> {
 
   Widget _getPositionedWidget() {
     bool isSelected = widget.controller.getIsSelected;
-    logger("Table ${widget.controller.tableId} is selected: $isSelected");
     if (isSelected) {
       return Positioned(
           top: widget.controller.getOffset.dy,
@@ -95,11 +93,11 @@ class _TableWidgetState extends State<TableWidget> {
     return FocusableControlBuilder(
         onPressed: widget.isDisabled!
             ? null
-            : (widget.onTap ??
+            : widget.onTap ??
                 () {
                   Manager.canvasController.selectTable(widget.controller);
                   setState(() {});
-                }),
+                },
         builder: (context, control) {
           return CustomPaint(
               foregroundPainter: _TablePainter(
@@ -107,8 +105,10 @@ class _TableWidgetState extends State<TableWidget> {
                 isHovered: control.isHovered,
                 isSelected: isSelected,
               ),
-              child:
-                  Center(child: child ?? const Text("CANNOT FIND THE CHILD")));
+              child: Center(
+                  child:
+                      // Text(widget.controller.tableId.toString())
+                      child ?? const Text("CANNOT FIND THE CHILD")));
         });
   }
 

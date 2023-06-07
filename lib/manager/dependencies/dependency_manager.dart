@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:table_layout_demo/manager/dependencies/dependencies.dart';
-
 import '../controllers/controllers.dart';
 
 class Manager {
@@ -33,11 +32,11 @@ class Manager {
   static void init() {
     _getIt.registerSingleton<AppDep>(_appDep);
 
-    final _cController = Get.put<CanvasController>(CanvasController());
-    final _gtController =
+    final cController = Get.put<CanvasController>(CanvasController());
+    final gtController =
         Get.put<GeneralTableController>(GeneralTableController());
-    _getIt.registerSingleton<CanvasController>(_cController);
-    _getIt.registerSingleton<GeneralTableController>(_gtController);
+    _getIt.registerSingleton<CanvasController>(cController);
+    _getIt.registerSingleton<GeneralTableController>(gtController);
 
     _getIt.registerSingleton<ConfigDep>(_configDep);
   }

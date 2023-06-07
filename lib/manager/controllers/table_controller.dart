@@ -33,7 +33,7 @@ class TableController extends ValueNotifier<TableData> {
       bool? isSelected,
       this.callback,
       TableDecoration? tableDecoration,
-      required String tableId})
+      String? tableId})
       : super(
           TableData(
             tableName: tableName,
@@ -42,7 +42,6 @@ class TableController extends ValueNotifier<TableData> {
             key: UniqueKey(),
             isSelected: isSelected,
             tableDecoration: tableDecoration,
-            tableId: tableId,
           ),
         );
 
@@ -52,7 +51,7 @@ class TableController extends ValueNotifier<TableData> {
   String get getTableName => value.tableName!;
   TableDecoration get getTableDecoration => value.tableDecoration!;
   TableShape get getTableShape => value.tableDecoration!.tableShape!;
-  String get tableId => value.tableId;
+  String get tableId => value.tableId!;
   IWidget? get child => getTableDecoration.child;
 
   set setOffset(Offset offset) => value = value.copyWith(offset: offset);

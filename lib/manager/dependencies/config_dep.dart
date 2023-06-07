@@ -44,8 +44,6 @@ class _GridSizes {
   /// Makes 1 cell [_defaultGridCellSize.height] pixels
   int get defaultGridSubdivision =>
       defaultGridCellSize.width ~/ defaultGridCellSize.height;
-  Size get defaultTableSize =>
-      const Size(8, 8).toSizeFromCellIndex; // 8 is pixels of table
   double defaultSidebarWidth = 500;
 }
 

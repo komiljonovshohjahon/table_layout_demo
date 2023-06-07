@@ -60,7 +60,7 @@ class TableData {
   final UniqueKey key;
   bool? isSelected;
   TableDecoration? tableDecoration;
-  String tableId;
+  String? tableId;
 
   Offset get getOffset => offset!;
   Size get getSize => size!;
@@ -95,13 +95,14 @@ class TableData {
     required this.tableName,
     required this.isSelected,
     this.tableDecoration,
-    required this.tableId,
+    this.tableId,
   }) {
-    size ??= Manager.configDep.sizes.defaultTableSize;
+    size ??= Manager.configDep.sizes.defaultGridCellSize.toSizeFromCellIndex;
     offset ??= const Offset(0, 0);
     tableName ??= 'Table ${key.toString()}';
     isSelected ??= false;
     tableDecoration ??= TableDecoration();
+    tableId ??= key.toString();
   }
 
   @override

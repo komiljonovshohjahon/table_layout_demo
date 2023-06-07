@@ -119,9 +119,11 @@ class CanvasController extends GetxController {
     ctr.setIsSelected = true;
     heightTEC.text = ctr.getSize.toCellIndex.height.toString();
     widthTEC.text = ctr.getSize.toCellIndex.width.toString();
+    // logger(getSelectedTable!.controller.tableId);
     if (swap && tables.length >= 2) {
       final indexOf1 = tables.indexOf(tables
           .firstWhere((element) => element.controller.tableId == ctr.tableId));
+      logger(indexOf1);
       if (getSelectedTable != null) {
         List<TableWidget> l =
             swapList<TableWidget>(tables, indexOf1, tables.length - 1);
@@ -129,7 +131,6 @@ class CanvasController extends GetxController {
       }
     }
     // ctr.callback?.call();
-    logger("selectTable: ${ctr.tableId}");
     update([GridConstants.gridCanvasId, GridConstants.gridSidebarTablePropsId]);
   }
 
@@ -145,12 +146,6 @@ class CanvasController extends GetxController {
       if (widthTEC.text.endsWith(".0")) {
         widthTEC.text = widthTEC.text.substring(0, widthTEC.text.length - 2);
       }
-    });
-
-    _tables.listen((p0) {
-      logger("tables OLD: $tables");
-      logger("tables: $p0");
-      //New added
     });
   }
 
@@ -251,6 +246,7 @@ class CanvasController extends GetxController {
 
     //create a JSON file and save locally with the above data
     final File json = File("gen/widget_configs/${widgetName}_config.json");
+    if (!json.existsSync()) return;
     writeJson(json).then((success) {
       Get.showSnackbar(const GetSnackBar(
         duration: Duration(seconds: 2),

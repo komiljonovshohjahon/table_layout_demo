@@ -43,11 +43,9 @@ class SidebarWidget extends StatelessWidget {
                         runSpacing: 10,
                         children: [
                           for (int i = 0; i < coreWidgets.length; i++)
-                            _buildTableButton(
-                                tableId: i.toString(), child: coreWidgets[i]),
+                            _buildTableButton(child: coreWidgets[i]),
                           for (int i = 0; i < yoshopWidgets.length; i++)
-                            _buildTableButton(
-                                tableId: i.toString(), child: yoshopWidgets[i]),
+                            _buildTableButton(child: yoshopWidgets[i]),
                         ],
                       ),
                     ),
@@ -253,20 +251,19 @@ class SidebarWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildTableButton({required String tableId, required IWidget child}) {
-    final tableCtr = TableController(
-        tableId: tableId,
-        tableDecoration: TableDecoration(child: child.copy()));
+  Widget _buildTableButton({required IWidget child}) {
+    final tableCtr =
+        TableController(tableDecoration: TableDecoration(child: child.copy()));
     return Container(
       width: 80,
       height: 80,
       color: Colors.black38,
       child: TableWidget(
-        isPositioned: false,
-        isDisabled: false, // isDisabled,
         onTap: () {
           Manager.canvasController.addTable(tableCtr);
         },
+        isPositioned: false,
+        isDisabled: false, // isDisabled,
         controller: tableCtr,
       ),
     );
