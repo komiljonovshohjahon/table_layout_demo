@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:table_layout_demo/manager/dependencies/dependencies.dart';
 import 'package:table_layout_demo/ui/table_widget.dart';
 import 'package:table_layout_demo/utils/utils.dart';
+import '../models/models.dart';
 import 'controllers.dart';
 export '../../utils/logger.dart';
 
@@ -154,6 +155,25 @@ class CanvasController extends GetxController {
     heightTEC.dispose();
     widthTEC.dispose();
     super.onClose();
+  }
+
+  final List<VarModel> customVariables = [];
+
+  void addCustomVariable(VarModel variable) {
+    if (customVariables.contains(variable)) {
+      //replace variable
+      final index = customVariables.indexOf(variable);
+      customVariables[index] = variable;
+      update([GridConstants.gridSidebarTablePropsId]);
+      return;
+    }
+    customVariables.add(variable);
+    update([GridConstants.gridSidebarTablePropsId]);
+  }
+
+  void removeCustomVariable(VarModel variable) {
+    customVariables.remove(variable);
+    update([GridConstants.gridSidebarTablePropsId]);
   }
 
   Future<void> saveAsJson() async {

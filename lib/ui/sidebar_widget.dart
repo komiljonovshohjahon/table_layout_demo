@@ -5,6 +5,7 @@ import 'package:table_layout_demo/manager/controllers/controllers.dart';
 import 'package:table_layout_demo/manager/dependencies/dependencies.dart';
 import 'package:table_layout_demo/manager/models/models.dart';
 import 'package:table_layout_demo/ui/table_widget.dart';
+import 'package:table_layout_demo/ui/var_resource.dart';
 import 'package:table_layout_demo/utils/utils.dart';
 
 class SidebarWidget extends StatelessWidget {
@@ -230,6 +231,25 @@ class SidebarWidget extends StatelessWidget {
         ),
       ],
     ));
+
+    params.add(Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        getTitle("Variables"),
+        SizedBox(
+          width: 150,
+          height: 30,
+          child: ResourceVarSelector(onAdded: controller.addCustomVariable),
+        ),
+      ],
+    ));
+
+    for (var variable in controller.customVariables) {
+      params.add(ResourceVarSelector(
+        model: variable,
+        onAdded: controller.addCustomVariable,
+      ));
+    }
 
     if (controller.getSelectedTable != null) {
       if (controller.getSelectedTable!.controller.child != null) {
