@@ -144,6 +144,7 @@ class _TablePainter extends CustomPainter {
     final borderPaint = Paint()
       ..color = mainColor
       ..strokeWidth = 2
+      ..strokeJoin = StrokeJoin.bevel
       ..style = PaintingStyle.stroke;
     //draw border
     canvas.drawRect(Offset.zero & size, borderPaint);

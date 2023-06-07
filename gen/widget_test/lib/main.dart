@@ -33,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    final test = CustomTestComponent();
+    final test = CustomTest1Component();
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         body: Center(child: test));

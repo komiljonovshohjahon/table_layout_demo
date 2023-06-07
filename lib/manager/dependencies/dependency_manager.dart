@@ -25,8 +25,13 @@ class Manager {
   static GeneralTableController get generalTableController =>
       _getIt<GeneralTableController>();
 
+  //Config dependency
   static final ConfigDep _configDep = ConfigDep();
   static ConfigDep get configDep => _getIt<ConfigDep>();
+
+  //Exporter dependency
+  static final ExporterDep _exporterDep = ExporterDep();
+  static ExporterDep get exporterDep => _getIt<ExporterDep>();
 
   //It is run in main.dart
   static void init() {
@@ -39,5 +44,7 @@ class Manager {
     _getIt.registerSingleton<GeneralTableController>(gtController);
 
     _getIt.registerSingleton<ConfigDep>(_configDep);
+
+    _getIt.registerSingleton<ExporterDep>(_exporterDep);
   }
 }

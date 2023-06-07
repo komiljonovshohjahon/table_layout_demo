@@ -160,7 +160,7 @@ class __HomepageState extends State<_Homepage> {
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            Manager.appDep.restart();
+            Manager.canvasController.saveAsJson();
           },
           label: const Text(
             'Test Button',

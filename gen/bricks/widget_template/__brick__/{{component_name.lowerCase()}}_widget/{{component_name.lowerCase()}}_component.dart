@@ -6,19 +6,34 @@ class Custom{{component_name.pascalCase()}}Options {
   Custom{{component_name.pascalCase()}}Options({
     {{#options.required_variables}}required this.{{name}},
     {{/options.required_variables}}
+
+    {{#options.custom_variables}}required this.{{name}} ,
+    {{/options.custom_variables}}
   });
 
+  //required variables
   {{#options.required_variables}}final {{{type}}} {{name}};
   {{/options.required_variables}}
+
+  //custom variables
+  {{#options.custom_variables}}final {{type}} {{name}};
+  {{/options.custom_variables}}
 }
 
 class _State {
+  //required variables
  {{#options.required_variables}}final {{{type}}} {{name}} = {{value}};
  {{/options.required_variables}}
 
+  //custom variables
+ {{#options.custom_variables}}final {{type}} {{name}} = {{{value}}};
+ {{/options.custom_variables}}
+
   Custom{{component_name.pascalCase()}}Options get options => Custom{{component_name.pascalCase()}}Options(
-       {{#options.required_variables}} {{name}}: {{value}},
+       {{#options.required_variables}} {{name}}: {{name}},
        {{/options.required_variables}}
+      {{#options.custom_variables}} {{name}}: {{name}},
+      {{/options.custom_variables}}
       );
 }
 
@@ -58,10 +73,6 @@ class _Custom{{component_name.pascalCase()}}Widget extends StatelessWidget {
    _Custom{{component_name.pascalCase()}}Widget(this.options,{Key? key}) : super(key: key);
 
   final Custom{{component_name.pascalCase()}}Options options;
-
-  {{#children}}
-  final {{{type}}} {{name}} = {{{type}}}(customOptions: {{option_type}}.fromMap({{{options}}}));
-  {{/children}}
 
 
   @override

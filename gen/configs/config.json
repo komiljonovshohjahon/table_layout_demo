@@ -2,6 +2,13 @@
   "component_name": "test",
   "component_type": "test",
   "options": {
+    "custom_variables": [
+      {
+        "name": "full_name",
+        "type": "String",
+        "value": "'test'"
+      }
+    ],
     "required_variables": [
       {
         "name": "component_width",

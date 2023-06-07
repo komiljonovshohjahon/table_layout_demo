@@ -99,7 +99,7 @@ class TableData {
   }) {
     size ??= Manager.configDep.sizes.defaultGridCellSize.toSizeFromCellIndex;
     offset ??= const Offset(0, 0);
-    tableName ??= 'Table ${key.toString()}';
+    tableName ??= 'Table${key.toString()}';
     isSelected ??= false;
     tableDecoration ??= TableDecoration();
     tableId ??= key.toString();
