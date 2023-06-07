@@ -180,6 +180,6 @@ class CanvasController extends GetxController {
     //get the children of the widget
     final List<TableController> childrenControllers =
         tables.map<TableController>((element) => element.controller).toList();
-    Manager.exporterDep.export(childrenControllers);
+    Manager.exporterDep.export(childrenControllers, customVariables);
   }
 }

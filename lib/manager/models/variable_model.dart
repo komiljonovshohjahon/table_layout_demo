@@ -1,4 +1,5 @@
 import 'package:creatego_packages/creatego_packages.dart';
+import 'package:get/get.dart';
 
 class VarModel extends Equatable {
   VarModel({
@@ -36,21 +37,23 @@ class VarModel extends Equatable {
   @override
   List<Object?> get props => [type, name, value];
 
-  Map<String, dynamic> toMap() {
-    return {
-      mapKey("type"): type,
-      mapKey("name"): mapKey(name),
+  Map<String, dynamic> toJson() {
+    final map = {
+      "type": type.toDartType(value),
+      "name": name,
     };
-  }
-
-  factory VarModel.fromMap(Map<String, dynamic> map) {
-    return VarModel(
-      type: map['type'],
-      name: map['name'],
-    );
+    map["value"] = type.convertValue(value) ?? "null";
+    return map;
   }
 }
 
+/// If new added, steps to follow are:
+/// 1. add to [VariableType]
+/// 2. add to [toString]
+/// 3. add to [checkValueIsCorrectType]
+/// 4. add to [toDartType]
+/// 5. add to [convertValue]
+/// 6. add to [types]
 enum VariableType {
   number,
   string,
@@ -93,12 +96,29 @@ enum VariableType {
   }
 
   //enum to dart type
-  String toDartType() {
-    if (this == VariableType.number) return "num";
-    if (this == VariableType.boolean) return "bool";
-    if (this == VariableType.string) return "String";
-    if (this == VariableType.list) return "List<String>";
+  String toDartType(String? value) {
+    if (this == VariableType.number) return "num${value == null ? "?" : ""}";
+    if (this == VariableType.boolean) return "bool${value == null ? "?" : ""}";
+    if (this == VariableType.string) return "String${value == null ? "?" : ""}";
+    if (this == VariableType.list) {
+      return "List<String>${value == null ? "?" : ""}";
+    }
     return "String";
+  }
+
+  String? convertValue(String? value) {
+    if (value == null) return null;
+    if (this == VariableType.number) return num.tryParse(value)?.toString();
+    if (this == VariableType.boolean) return value == "true" ? "true" : "false";
+    if (this == VariableType.string) return value;
+    if (this == VariableType.list) {
+      return value.removeAllWhitespace
+          .split(',')
+          .map((e) => "'$e'")
+          .toList()
+          .toString();
+    }
+    return null;
   }
 }
 

@@ -1,4 +1,5 @@
 import 'package:creatego_packages/creatego_packages.dart';
+import 'package:table_layout_demo/manager/models/variable_model.dart';
 
 class JsonModel extends Equatable {
   final String componentName;
@@ -28,7 +29,7 @@ class JsonModel extends Equatable {
 }
 
 class Options extends Equatable {
-  final List<Variable> customVariables;
+  final List<VarModel> customVariables;
   final double componentWidth;
   final double componentHeight;
 
@@ -57,30 +58,6 @@ class Options extends Equatable {
           'value': componentHeight,
         },
       ],
-    };
-  }
-}
-
-class Variable extends Equatable {
-  final String name;
-  final String type;
-  final String? value;
-
-  const Variable({
-    required this.name,
-    required this.type,
-    this.value,
-  });
-
-  @override
-  List<Object?> get props => [name, type, value];
-
-  //toJson
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'type': type,
-      'value': "'$value'",
     };
   }
 }

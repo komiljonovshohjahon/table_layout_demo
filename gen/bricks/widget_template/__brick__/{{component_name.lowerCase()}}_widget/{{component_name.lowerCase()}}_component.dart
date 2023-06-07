@@ -16,7 +16,7 @@ class Custom{{component_name.pascalCase()}}Options {
   {{/options.required_variables}}
 
   //custom variables
-  {{#options.custom_variables}}final {{type}} {{name}};
+  {{#options.custom_variables}}final {{{type}}} {{name}};
   {{/options.custom_variables}}
 }
 
@@ -26,7 +26,7 @@ class _State {
  {{/options.required_variables}}
 
   //custom variables
- {{#options.custom_variables}}final {{type}} {{name}} = {{{value}}};
+ {{#options.custom_variables}}final {{{type}}} {{name}} = {{{value}}};
  {{/options.custom_variables}}
 
   Custom{{component_name.pascalCase()}}Options get options => Custom{{component_name.pascalCase()}}Options(

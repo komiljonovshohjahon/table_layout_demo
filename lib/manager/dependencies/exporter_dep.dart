@@ -107,15 +107,16 @@ class ExporterDep extends IExporter {
   }
 
   @override
-  Future<void> export(List<TableController> children) async {
+  Future<void> export(
+      List<TableController> children, List<VarModel> customVariables) async {
     //find name
-    final String? widgetName = await showNamePopup('test');
+    final String? widgetName = await showNamePopup('test1');
     if (widgetName == null) return;
     const String widgetType = "test"; //TODO: get widget type
     final Options options = Options(
       componentWidth: canvasSize.width,
       componentHeight: canvasSize.height,
-      customVariables: const [],
+      customVariables: customVariables, //TODO: get custom variables
     );
     final List<Child> ch = [];
     for (var child in children) {
@@ -166,5 +167,6 @@ abstract class IExporter {
   Future<bool> saveFileAsJson(File json);
 
   ///perform export
-  Future<void> export(List<TableController> children);
+  Future<void> export(
+      List<TableController> children, List<VarModel> customVariables);
 }
