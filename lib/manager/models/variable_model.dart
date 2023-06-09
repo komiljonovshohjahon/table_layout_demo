@@ -18,12 +18,13 @@ class VarModel extends Equatable {
 
   void setName(String value) {
     if (value.isNotEmpty) {
-      name = value;
+      name = value.removeAllWhitespace;
     }
   }
 
   void setType(VariableType value) {
     type = value;
+    this.value = null;
   }
 
   bool get isVerified {
@@ -38,12 +39,18 @@ class VarModel extends Equatable {
   List<Object?> get props => [type, name, value];
 
   Map<String, dynamic> toJson() {
+    setMiddleware();
     final map = {
       "type": type.toDartType(value),
       "name": name,
+      "value": type.convertValue(value) ?? "null",
     };
-    map["value"] = type.convertValue(value) ?? "null";
     return map;
+  }
+
+  (VariableType type, String name, String? value) setMiddleware() {
+    //TODO: set middleware
+    return (type, name, value);
   }
 }
 
@@ -106,6 +113,7 @@ enum VariableType {
     return "String";
   }
 
+  //enum value to string
   String? convertValue(String? value) {
     if (value == null) return null;
     if (this == VariableType.number) return num.tryParse(value)?.toString();

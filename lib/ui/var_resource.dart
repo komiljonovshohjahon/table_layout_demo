@@ -30,6 +30,7 @@ class ResourceVarSelector extends StatelessWidget {
             onPressed: () async {
               final m = model ?? VarModel();
               await showDialog(
+                  barrierDismissible: false,
                   context: context,
                   builder: (context) {
                     return StatefulBuilder(builder: (context, setState) {
@@ -48,7 +49,7 @@ class ResourceVarSelector extends StatelessWidget {
                                 items: types),
                             const SizedBox(height: 20),
                             ResourceInputField(
-                              label: "Name",
+                              label: "Variable Name",
                               onChanged: (value) {
                                 setState(() {
                                   m.setName(value);
@@ -57,15 +58,28 @@ class ResourceVarSelector extends StatelessWidget {
                               initialValue: m.name,
                             ),
                             const SizedBox(height: 20),
-                            ResourceInputField(
-                              label: "Value (Opt) ${getHint(m)}",
-                              onChanged: (value) {
-                                setState(() {
-                                  m.setDefaultValue(value);
-                                });
-                              },
-                              initialValue: m.value,
-                            ),
+                            if (m.type == VariableType.boolean)
+                              ResourceDropdown<bool>(
+                                  onChanged: (value) {
+                                    setState(() {
+                                      m.setDefaultValue(value.toString());
+                                    });
+                                  },
+                                  value: m.value == null
+                                      ? null
+                                      : m.value == "true",
+                                  items: const [true, false])
+                            else
+                              ResourceInputField(
+                                label: "Value (Opt) ${getHint(m)}",
+                                onChanged: (value) {
+                                  setState(() {
+                                    m.setDefaultValue(value);
+                                  });
+                                },
+                                keyboardType: getKeyboardType(m),
+                                initialValue: m.value,
+                              ),
                           ],
                         ),
                         actions: [
@@ -118,5 +132,14 @@ class ResourceVarSelector extends StatelessWidget {
       hint = "e.g. 1,2,3,4 (comma separated)";
     }
     return hint;
+  }
+
+  TextInputType getKeyboardType(VarModel model) {
+    TextInputType type = TextInputType.text;
+    if (model.type == VariableType.number) type = TextInputType.number;
+    if (model.type == VariableType.list) {
+      type = TextInputType.text;
+    }
+    return type;
   }
 }

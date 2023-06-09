@@ -2,8 +2,8 @@
 import 'package:creatego_interface/creatego_interface.dart';
 import 'package:flutter/material.dart';
 
-class CustomTest1Options {
-  CustomTest1Options({
+class CustomMyBlockOptions {
+  CustomMyBlockOptions({
     required this.component_width,
     required this.component_height,
     required this.isDisabed,
@@ -31,7 +31,7 @@ class _State {
   final bool isTakeout = true;
   final String? name = null;
 
-  CustomTest1Options get options => CustomTest1Options(
+  CustomMyBlockOptions get options => CustomMyBlockOptions(
         component_width: component_width,
         component_height: component_height,
         isDisabed: isDisabed,
@@ -40,29 +40,29 @@ class _State {
       );
 }
 
-class CustomTest1Component extends IWidget<CustomTest1Options> {
+class CustomMyBlockComponent extends IWidget<CustomMyBlockOptions> {
   final _state = _State();
 
-  CustomTest1Component({Key? key}) : super(key: key);
+  CustomMyBlockComponent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, {ValueChanged<IWidget>? onTapped}) {
-    return ValueListenableBuilder<CustomTest1Options>(
+    return ValueListenableBuilder<CustomMyBlockOptions>(
       valueListenable: notifier,
       builder: (context, value, child) {
-        return _CustomTest1Widget(value);
+        return _CustomMyBlockWidget(value);
       },
     );
   }
 
   @override
   IWidget copy() {
-    final CustomTest1Component newWidget = CustomTest1Component();
+    final CustomMyBlockComponent newWidget = CustomMyBlockComponent();
     return newWidget;
   }
 
   @override
-  CustomTest1Options setOptions() {
+  CustomMyBlockOptions setOptions() {
     return _state.options;
   }
 
@@ -70,10 +70,10 @@ class CustomTest1Component extends IWidget<CustomTest1Options> {
   WidgetType get widgetType => WidgetType.test;
 }
 
-class _CustomTest1Widget extends StatelessWidget {
-  _CustomTest1Widget(this.options, {Key? key}) : super(key: key);
+class _CustomMyBlockWidget extends StatelessWidget {
+  _CustomMyBlockWidget(this.options, {Key? key}) : super(key: key);
 
-  final CustomTest1Options options;
+  final CustomMyBlockOptions options;
 
   @override
   Widget build(BuildContext context) {

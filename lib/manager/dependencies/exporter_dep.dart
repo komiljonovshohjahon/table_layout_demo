@@ -43,7 +43,7 @@ class ExporterDep extends IExporter {
 
   @override
   String getSavePath(String widgetName) {
-    return "gen/configs/${widgetName}_config.json";
+    return "gen/configs/${widgetName}_config.json"; //TODO: Fix the path
   }
 
   @override
@@ -82,7 +82,7 @@ class ExporterDep extends IExporter {
   @override
   void showSnackbar(String message, [String title = "Success"]) {
     Get.showSnackbar(GetSnackBar(
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
       title: title,
       message: message,
     ));
@@ -95,7 +95,7 @@ class ExporterDep extends IExporter {
       final File file =
           await json.writeAsString(jsonEncode(jsonModel.toJson()));
       if (file.existsSync()) {
-        showSnackbar("File saved as${file.path} successfully");
+        showSnackbar("File saved as '${file.path}' successfully");
         success = true;
       }
       return success;
@@ -116,7 +116,7 @@ class ExporterDep extends IExporter {
     final Options options = Options(
       componentWidth: canvasSize.width,
       componentHeight: canvasSize.height,
-      customVariables: customVariables, //TODO: get custom variables
+      customVariables: customVariables,
     );
     final List<Child> ch = [];
     for (var child in children) {
@@ -125,7 +125,8 @@ class ExporterDep extends IExporter {
           size: child.getSize,
           name: child.getTableName,
           type: child.child.toString(),
-          optionType: "ButtonOptions", //TODO: get options
+          optionType: "ButtonOptions",
+          //TODO: get options
           options: child.child!.options.toMap()));
     }
     setJsonModel(
@@ -136,9 +137,9 @@ class ExporterDep extends IExporter {
     final File json = File(getSavePath(widgetName));
     final bool success = await saveFileAsJson(json);
     if (success) {
-      showSnackbar("File saved successfully");
+      showSnackbar("Export successful");
     } else {
-      showSnackbar("Error saving file", "Error");
+      showSnackbar("Export failed", "Error");
     }
   }
 }

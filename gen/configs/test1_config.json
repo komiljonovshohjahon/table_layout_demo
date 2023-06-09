@@ -1,1 +1,59 @@
-{"component_name":"test1","component_type":"test","options":{"custom_variables":[{"type":"List<String>","name":"name","value":"['abc', 'dfe']"},{"type":"num?","name":"name1","value":"null"}],"required_variables":[{"name":"component_width","type":"double","value":600.0},{"name":"component_height","type":"double","value":500.0}]},"children":[{"offset":{"x":210.0,"y":215.0},"size":{"w":100.0,"h":100.0},"name":"Table[#e9121]","type":"CustomButton","option_type":"ButtonOptions","options":{"\"text\"":"\"Button\"","\"backgroundColor\"":4294198070,"\"fontSize\"":16.0,"\"fontWeight\"":3,"\"textColor\"":4294967295,"\"borderRadius\"":0.0,"\"isIconRight\"":"'true'"}}]}
+{
+  "component_name": "test1",
+  "component_type": "test",
+  "options": {
+    "custom_variables": [
+      {
+        "type": "bool",
+        "name": "isDisabed",
+        "value": "false"
+      },
+      {
+        "type": "bool",
+        "name": "isTakeout",
+        "value": "true"
+      },
+      {
+        "type": "String?",
+        "name": "name",
+        "value": "null"
+      }
+    ],
+    "required_variables": [
+      {
+        "name": "component_width",
+        "type": "double",
+        "value": 600.0
+      },
+      {
+        "name": "component_height",
+        "type": "double",
+        "value": 500.0
+      }
+    ]
+  },
+  "children": [
+    {
+      "offset": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "size": {
+        "w": 100.0,
+        "h": 100.0
+      },
+      "name": "Table[#acb56]",
+      "type": "CustomButton",
+      "option_type": "ButtonOptions",
+      "options": {
+        "\"text\"": "\"Button\"",
+        "\"backgroundColor\"": 4294198070,
+        "\"fontSize\"": 16.0,
+        "\"fontWeight\"": 3,
+        "\"textColor\"": 4294967295,
+        "\"borderRadius\"": 0.0,
+        "\"isIconRight\"": "'true'"
+      }
+    }
+  ]
+}
