@@ -35,12 +35,15 @@ dependencies:
 
   # External packages
   get: ^4.6.5
+  focusable_control_builder: ^1.0.1+1
+  get_it: ^7.6.0
 
   # Internal packages
   creatego_packages:
     path: ../creatego_packages
-  focusable_control_builder: ^1.0.1+1
-  get_it: ^7.6.0
+
+  github_client:
+    path: ../github_client
 
 dev_dependencies:
   flutter_test:
