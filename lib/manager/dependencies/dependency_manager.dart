@@ -26,11 +26,9 @@ class Manager {
       _getIt<GeneralTableController>();
 
   //Config dependency
-  static final ConfigDep _configDep = ConfigDep();
   static ConfigDep get configDep => _getIt<ConfigDep>();
 
   //Exporter dependency
-  static final ExporterDep _exporterDep = ExporterDep();
   static ExporterDep get exporterDep => _getIt<ExporterDep>();
 
   //It is run in main.dart
@@ -43,8 +41,8 @@ class Manager {
     _getIt.registerSingleton<CanvasController>(cController);
     _getIt.registerSingleton<GeneralTableController>(gtController);
 
-    _getIt.registerSingleton<ConfigDep>(_configDep);
+    _getIt.registerSingleton<ConfigDep>(ConfigDep());
 
-    _getIt.registerSingleton<ExporterDep>(_exporterDep);
+    _getIt.registerSingleton<ExporterDep>(ExporterDep());
   }
 }

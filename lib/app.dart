@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:table_layout_demo/manager/models/json_model.dart';
 import 'package:table_layout_demo/utils/utils.dart';
 import 'manager/dependencies/dependencies.dart';
 import 'ui/grid_canvas_widget.dart';
@@ -159,8 +162,11 @@ class __HomepageState extends State<_Homepage> {
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            Manager.canvasController.saveAsJson();
+          onPressed: () async {
+            String data = await DefaultAssetBundle.of(context)
+                .loadString("assets/widgets/test1_config.json");
+            final jsonResult = jsonDecode(data); //latest Dart
+            final JsonModel jsonModel = JsonModel.fromJson(jsonResult);
           },
           label: const Text(
             'Test Button',

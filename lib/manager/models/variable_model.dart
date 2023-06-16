@@ -48,6 +48,19 @@ class VarModel extends Equatable {
     return map;
   }
 
+  factory VarModel.fromJson(Map<String, dynamic> json) {
+    final type = VariableType.values.firstWhere(
+      (element) => element.toString() == json["type"],
+    );
+    final name = json["name"];
+    final value = json["value"];
+    return VarModel(
+      type: type,
+      name: name,
+      value: value,
+    );
+  }
+
   (VariableType type, String name, String? value) setMiddleware() {
     //TODO: set middleware
     return (type, name, value);

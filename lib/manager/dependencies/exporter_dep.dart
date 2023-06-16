@@ -34,6 +34,7 @@ class ExporterDep extends IExporter {
     required List<Child> children,
   }) {
     jsonModel = JsonModel(
+      id: "${componentName}_id_${DateTime.now().millisecondsSinceEpoch}",
       children: children,
       componentName: componentName,
       componentType: componentType,
