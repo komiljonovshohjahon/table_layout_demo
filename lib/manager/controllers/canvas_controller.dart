@@ -12,6 +12,8 @@ import 'controllers.dart';
 export '../../utils/logger.dart';
 
 class CanvasController extends GetxController {
+  String? id;
+
   final TextEditingController heightTEC = TextEditingController();
   final TextEditingController widthTEC = TextEditingController();
 
@@ -180,6 +182,10 @@ class CanvasController extends GetxController {
     //get the children of the widget
     final List<TableController> childrenControllers =
         tables.map<TableController>((element) => element.controller).toList();
-    Manager.exporterDep.export(childrenControllers, customVariables);
+    Manager.exporterDep.export(childrenControllers, customVariables, id: id);
+  }
+
+  Future<void> loadFromJson(String json) async {
+    await Manager.importerDep.import(json);
   }
 }

@@ -256,4 +256,17 @@ class TableController extends ValueNotifier<TableData> {
       tableName: tableName,
     );
   }
+
+  factory TableController.fromChild(Child child) {
+    return TableController(
+      offset: child.offset,
+      size: child.size,
+      tableName: child.name,
+      tableDecoration: TableDecoration(
+        child: CustomButton(
+          customOptions: ButtonOptions.fromMap(child.options),
+        ),
+      ),
+    );
+  }
 }

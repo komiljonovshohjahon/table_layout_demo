@@ -31,6 +31,9 @@ class Manager {
   //Exporter dependency
   static ExporterDep get exporterDep => _getIt<ExporterDep>();
 
+  //Importer dependency
+  static ImporterDep get importerDep => _getIt<ImporterDep>();
+
   //It is run in main.dart
   static void init() {
     _getIt.registerSingleton<AppDep>(_appDep);
@@ -44,5 +47,7 @@ class Manager {
     _getIt.registerSingleton<ConfigDep>(ConfigDep());
 
     _getIt.registerSingleton<ExporterDep>(ExporterDep());
+
+    _getIt.registerSingleton<ImporterDep>(ImporterDep());
   }
 }

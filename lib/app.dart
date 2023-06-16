@@ -1,8 +1,11 @@
 import 'dart:convert';
 
+import 'package:creatego_packages/creatego_packages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:table_layout_demo/manager/controllers/controllers.dart';
 import 'package:table_layout_demo/manager/models/json_model.dart';
+import 'package:table_layout_demo/manager/models/models.dart';
 import 'package:table_layout_demo/utils/utils.dart';
 import 'manager/dependencies/dependencies.dart';
 import 'ui/grid_canvas_widget.dart';
@@ -165,8 +168,7 @@ class __HomepageState extends State<_Homepage> {
           onPressed: () async {
             String data = await DefaultAssetBundle.of(context)
                 .loadString("assets/widgets/test1_config.json");
-            final jsonResult = jsonDecode(data); //latest Dart
-            final JsonModel jsonModel = JsonModel.fromJson(jsonResult);
+            Manager.importerDep.import(data);
           },
           label: const Text(
             'Test Button',

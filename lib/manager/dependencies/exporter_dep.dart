@@ -28,13 +28,14 @@ class ExporterDep extends IExporter {
 
   @override
   void setJsonModel({
+    String? id,
     required String componentName,
     required String componentType,
     required Options options,
     required List<Child> children,
   }) {
     jsonModel = JsonModel(
-      id: "${componentName}_id_${DateTime.now().millisecondsSinceEpoch}",
+      id: id ?? "${componentName}_id_${DateTime.now().millisecondsSinceEpoch}",
       children: children,
       componentName: componentName,
       componentType: componentType,
@@ -109,7 +110,8 @@ class ExporterDep extends IExporter {
 
   @override
   Future<void> export(
-      List<TableController> children, List<VarModel> customVariables) async {
+      List<TableController> children, List<VarModel> customVariables,
+      {String? id}) async {
     //find name
     final String? widgetName = await showNamePopup('test1');
     if (widgetName == null) return;
@@ -127,10 +129,10 @@ class ExporterDep extends IExporter {
           name: child.getTableName,
           type: child.child.toString(),
           optionType: "ButtonOptions",
-          //TODO: get options
           options: child.child!.options.toMap()));
     }
     setJsonModel(
+        id: id,
         componentName: widgetName,
         componentType: widgetType,
         options: options,
@@ -143,6 +145,11 @@ class ExporterDep extends IExporter {
       showSnackbar("Export failed", "Error");
     }
   }
+
+  @override
+  Future<JsonModel> importFromJson(Map<String, dynamic> json) {
+    throw UnimplementedError();
+  }
 }
 
 abstract class IExporter {
@@ -150,6 +157,7 @@ abstract class IExporter {
 
   ///set the json model
   void setJsonModel({
+    String? id,
     required String componentName,
     required String componentType,
     required Options options,
@@ -170,5 +178,9 @@ abstract class IExporter {
 
   ///perform export
   Future<void> export(
-      List<TableController> children, List<VarModel> customVariables);
+      List<TableController> children, List<VarModel> customVariables,
+      {String? id});
+
+  ///import file
+  Future<JsonModel> importFromJson(Map<String, dynamic> json);
 }
