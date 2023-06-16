@@ -5,14 +5,28 @@
   "options": {
     "custom_variables": [],
     "required_variables": [
-      {"name": "component_width", "type": "double", "value": 400.0},
-      {"name": "component_height", "type": "double", "value": 450.0}
+      {
+        "name": "component_width",
+        "type": "double",
+        "value": 400.0
+      },
+      {
+        "name": "component_height",
+        "type": "double",
+        "value": 450.0
+      }
     ]
   },
   "children": [
     {
-      "offset": {"x": 100.0, "y": 0.0},
-      "size": {"w": 200.0, "h": 100.0},
+      "offset": {
+        "x": 100.0,
+        "y": 0.0
+      },
+      "size": {
+        "w": 200.0,
+        "h": 100.0
+      },
       "name": "Table[#7c3eb]",
       "type": "CustomButton",
       "option_type": "ButtonOptions",
