@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
+import 'package:github_client/github_client.dart';
 import 'package:table_layout_demo/manager/dependencies/dependencies.dart';
 import '../controllers/controllers.dart';
 

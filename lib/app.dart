@@ -1,12 +1,6 @@
-import 'dart:convert';
-
 import 'package:creatego_packages/creatego_packages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:github_client/github_client.dart';
-import 'package:table_layout_demo/manager/controllers/controllers.dart';
-import 'package:table_layout_demo/manager/models/json_model.dart';
-import 'package:table_layout_demo/manager/models/models.dart';
 import 'package:table_layout_demo/utils/utils.dart';
 import 'manager/dependencies/dependencies.dart';
 import 'ui/grid_canvas_widget.dart';
@@ -166,27 +160,7 @@ class __HomepageState extends State<_Homepage> {
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(
-          onPressed: () async {
-            // String data = await DefaultAssetBundle.of(context)
-            //     .loadString("assets/widgets/test1_config.json");
-            // Manager.importerDep.import(data);
-            final map = {
-              "message": "commmit message",
-              "committer": {
-                "name": "Shoh",
-                "email": "komiljonovshohjahon@gmail.com"
-              },
-              "sha": "a42b91b7e9903c6ff539fc3ebb3e6ffa3cb762fc",
-              "content":
-                  "ewogICJpZCI6ICJ0ZXN0MV9pZF8xNjg2ODc4MDU0Mjk2IiwKICAiY29tcG9uZW50X25hbWUiOiAidGVzdDExIiwKICAiY29tcG9uZW50X3R5cGUiOiAidGVzdCIsCiAgIm9wdGlvbnMiOiB7CiAgICAiY3VzdG9tX3ZhcmlhYmxlcyI6IFtdLAogICAgInJlcXVpcmVkX3ZhcmlhYmxlcyI6IFsKICAgICAgeyJuYW1lIjogImNvbXBvbmVudF93aWR0aCIsICJ0eXBlIjogImRvdWJsZSIsICJ2YWx1ZSI6IDQwMC4wfSwKICAgICAgeyJuYW1lIjogImNvbXBvbmVudF9oZWlnaHQiLCAidHlwZSI6ICJkb3VibGUiLCAidmFsdWUiOiA0NTAuMH0KICAgIF0KICB9LAogICJjaGlsZHJlbiI6IFsKICAgIHsKICAgICAgIm9mZnNldCI6IHsieCI6IDEwMC4wLCAieSI6IDAuMH0sCiAgICAgICJzaXplIjogeyJ3IjogMjAwLjAsICJoIjogMTAwLjB9LAogICAgICAibmFtZSI6ICJUYWJsZVsjN2MzZWJdIiwKICAgICAgInR5cGUiOiAiQ3VzdG9tQnV0dG9uIiwKICAgICAgIm9wdGlvbl90eXBlIjogIkJ1dHRvbk9wdGlvbnMiLAogICAgICAib3B0aW9ucyI6IHsKICAgICAgICAiXCJ0ZXh0XCIiOiAiXCJcIkJ1dHRvbiBUZXh0XCJcIiIsCiAgICAgICAgIlwiYmFja2dyb3VuZENvbG9yXCIiOiA0Mjk0MTkwMDcwLAogICAgICAgICJcImZvbnRTaXplXCIiOiAxNi4wLAogICAgICAgICJcImZvbnRXZWlnaHRcIiI6IDMsCiAgICAgICAgIlwidGV4dENvbG9yXCIiOiA0Mjk0OTY3Mjk1LAogICAgICAgICJcImJvcmRlclJhZGl1c1wiIjogMC4wLAogICAgICAgICJcImlzSWNvblJpZ2h0XCIiOiAiJ2ZhbHNlJyIKICAgICAgfQogICAgfQogIF0KfQ=="
-            };
-            final res = await GithubClient.postContent("test", map.toString());
-            if (res != null) {
-              print(res.downloadUrl);
-            } else {
-              Manager.exporterDep.showSnackbar("Cannot find a file", "Error");
-            }
-          },
+          onPressed: () async {},
           label: const Text(
             'Test Button',
             style: TextStyle(color: Colors.white, fontSize: 20),

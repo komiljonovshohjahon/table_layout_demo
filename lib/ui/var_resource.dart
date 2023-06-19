@@ -1,7 +1,6 @@
 import 'package:creatego_interface/creatego_interface.dart';
-import 'package:flutter/material.dart';
+import 'package:creatego_packages/creatego_packages.dart';
 import 'package:get/get.dart';
-import 'package:table_layout_demo/manager/models/models.dart';
 
 class ResourceVarSelector extends StatelessWidget {
   final ValueChanged<VarModel> onAdded;

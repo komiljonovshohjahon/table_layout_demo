@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:creatego_packages/creatego_packages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:github_client/github_client.dart';
 import 'package:table_layout_demo/manager/controllers/controllers.dart';
 import 'package:table_layout_demo/manager/models/models.dart';
 import 'package:table_layout_demo/utils/utils.dart';
@@ -91,24 +93,6 @@ class ExporterDep extends IExporter {
   }
 
   @override
-  Future<bool> saveFileAsJson(File json) async {
-    try {
-      bool success = false;
-      final File file =
-          await json.writeAsString(jsonEncode(jsonModel.toJson()));
-      if (file.existsSync()) {
-        showSnackbar("File saved as '${file.path}' successfully");
-        success = true;
-      }
-      return success;
-    } catch (e) {
-      showSnackbar("Error saving file $e", "Error");
-      logger("$e", 'saveFileAsJson');
-      return false;
-    }
-  }
-
-  @override
   Future<void> export(
       List<TableController> children, List<VarModel> customVariables,
       {String? id}) async {
@@ -137,8 +121,11 @@ class ExporterDep extends IExporter {
         componentType: widgetType,
         options: options,
         children: ch);
-    final File json = File(getSavePath(widgetName));
-    final bool success = await saveFileAsJson(json);
+    // final String path = getSavePath(widgetName);
+    bool success = false;
+    final res = await GithubClient.postContent(
+        widgetName, jsonModel.toJson().toString());
+    success = res != null;
     if (success) {
       showSnackbar("Export successful");
     } else {
@@ -146,6 +133,7 @@ class ExporterDep extends IExporter {
     }
   }
 
+  //TODO:
   @override
   Future<JsonModel> importFromJson(Map<String, dynamic> json) {
     throw UnimplementedError();
@@ -172,9 +160,6 @@ abstract class IExporter {
 
   ///show snackbar
   void showSnackbar(String message, [String title = "Success"]);
-
-  ///save file as json
-  Future<bool> saveFileAsJson(File json);
 
   ///perform export
   Future<void> export(

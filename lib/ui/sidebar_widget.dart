@@ -1,5 +1,4 @@
 import 'package:creatego_packages/creatego_packages.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_layout_demo/manager/controllers/controllers.dart';
 import 'package:table_layout_demo/manager/dependencies/dependencies.dart';

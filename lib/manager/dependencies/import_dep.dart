@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:creatego_packages/creatego_packages.dart';
 import 'package:table_layout_demo/manager/controllers/controllers.dart';
 import 'package:table_layout_demo/manager/dependencies/dependencies.dart';
-import 'package:table_layout_demo/manager/models/json_model.dart';
 import 'package:table_layout_demo/utils/utils.dart';
 
 class ImporterDep extends IImporter {
